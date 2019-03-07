@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Registration extends Component {
 	constructor() {
@@ -43,6 +44,7 @@ class Registration extends Component {
 
 			const parsedResponse = await registerResponse.json();
 			this.props.logIn(parsedResponse);
+			// this.props.history.push('/users');
 
 		} catch(err) {
 			console.log(err);
@@ -69,9 +71,10 @@ class Registration extends Component {
 					<input type='number' name='amenitiesImportance' onChange={this.handleChange} placeholder='Importance of Those Amenities' />
 					<button>Register</button>
 				</form>
+				<button onClick={this.props.hideReg}>Already Registered?</button>
 			</div>
 		)
 	}
 }
 
-export default Registration;
+export default withRouter(Registration);

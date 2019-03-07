@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class Login extends Component {
 	constructor() {
@@ -10,7 +11,7 @@ class Login extends Component {
 			message: ''
 		}
 	}
-	handleChange = (e)=>{
+	handleChange = (e) => {
 		this.setState({
 			[e.target.name]: e.target.value
 		})
@@ -33,12 +34,13 @@ class Login extends Component {
 				throw Error(loginResponse.statusText);
 			}
 			const parsed = await loginResponse.json();
-			this.props.logIn(parsed);
 			if(parsed){
 				this.setState({
 					message: ''
 				})
 			}
+			this.props.logIn(parsed);
+			// this.props.history.push('/users');
 		}catch(err){
 			console.log(err);
 			return(err);
@@ -52,9 +54,10 @@ class Login extends Component {
 					<input type="password" name="password" placeholder="Password" onChange={this.handleChange} className="login-input"/>
 					<button>Log In</button>
 				</form>
+				<button onClick={this.props.showReg}>Need to Register?</button>
 			</div>
 		)
 	}
 }
 
-export default Login;
+export default withRouter(Login);

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { withRouter } from 'react-router-dom';
 
 class UserContainer extends Component {
 	constructor() {
@@ -17,4 +18,4 @@ class UserContainer extends Component {
 }
 
 
-export default UserContainer;
+export default withRouter(UserContainer);

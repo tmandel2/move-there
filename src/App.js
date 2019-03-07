@@ -28,13 +28,15 @@ class App extends Component {
       username: user.username,
       _id: user.id
     });
+    console.log(this.state);
+    this.props.history.push('/users');
   }
   render() {
     return(
       <main>
         <Switch>
-          <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} />} />
-          <Route exact path="/users" component={ UserContainer }/>
+          <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} />} />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} />} />
           <Route component={ My404 }/>
         </Switch>
       </main>
@@ -42,4 +44,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);
