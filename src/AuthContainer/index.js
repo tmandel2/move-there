@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Login from './login.js';
-// import Register from '../Register';
+import Registration from './registration.js';
 
 class AuthContainer extends Component {
 	constructor() {
@@ -14,6 +14,7 @@ class AuthContainer extends Component {
 		return (
 			<div>Authocontainer
 				<Login />
+				<Registration />
 			</div>
 		)
 	}
