@@ -6,7 +6,7 @@ import AuthContainer from './AuthContainer';
 const My404 = () => {
   return (
     <div>
-      You've Taken a Wrong Turn
+      <img src="404Cat.jpg"/>
     </div>
   )
 }
