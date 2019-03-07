@@ -17,7 +17,9 @@ class NewAddress extends Component {
 			longitude: null,
 			walkScore: null,
 			medianAge: null,
+			// Total population divided by the biggest demographic. Higher is good.
 			diversity: null,
+			// House Cost divided by Average Income. Higher is bad.
 			houseValue: null
 		}
 	}
@@ -29,7 +31,7 @@ class NewAddress extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.streetNumber}+${this.state.streetName},+${this.state.city},+${this.state.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
+			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.streetNumber}+${this.state.streetName.replace(/ /gi, '+')},+${this.state.city.replace(/ /gi, '+')},+${this.state.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
 
 			const parsedLatLong = await latLongResponse.json();
 
