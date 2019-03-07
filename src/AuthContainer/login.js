@@ -33,7 +33,7 @@ class Login extends Component {
 				throw Error(loginResponse.statusText);
 			}
 			const parsed = await loginResponse.json();
-			console.log(parsed);
+			this.props.logIn(parsed);
 			if(parsed){
 				this.setState({
 					message: ''

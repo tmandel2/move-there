@@ -42,7 +42,7 @@ class Registration extends Component {
 			}
 
 			const parsedResponse = await registerResponse.json();
-
+			this.props.logIn(parsedResponse);
 
 		} catch(err) {
 			console.log(err);

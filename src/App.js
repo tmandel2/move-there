@@ -16,14 +16,24 @@ class App extends Component {
     super();
 
     this.state = {
-
+      loggedIn: false,
+      username: '',
+      _id: ''
     }
+  }
+  logIn = (user) => {
+    console.log('LOGIN HIT');
+    this.setState({
+      loggedIn: true,
+      username: user.username,
+      _id: user.id
+    });
   }
   render() {
     return(
       <main>
         <Switch>
-          <Route exact path="/" component={ AuthContainer }/>
+          <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} />} />
           <Route exact path="/users" component={ UserContainer }/>
           <Route component={ My404 }/>
         </Switch>

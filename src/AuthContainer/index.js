@@ -13,8 +13,8 @@ class AuthContainer extends Component {
 	render() {
 		return (
 			<div>Authocontainer
-				<Login />
-				<Registration />
+				<Login logIn={this.props.logIn}/>
+				<Registration logIn={this.props.logIn}/>
 			</div>
 		)
 	}
