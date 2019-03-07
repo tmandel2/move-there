@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import { Route, Switch } from 'react-router-dom';
+import { Route, Switch, withRouter } from 'react-router-dom';
 import './App.css';
+import AuthContainer from './AuthContainer';
 
 const My404 = () => {
   return (
@@ -20,13 +21,10 @@ class App extends Component {
   render() {
     return(
       <main>
-        <div>APP</div>
-       {/* <Switch>
+        <Switch>
           <Route exact path="/" component={ AuthContainer }/>
-          <Route exact path="/users" component={ UserContainer }/>
-          <Route exact path="/addresses" component={ AddressContainer }/>
           <Route component={ My404 }/>
-        </Switch>*/}
+        </Switch>
       </main>
     );
   }
