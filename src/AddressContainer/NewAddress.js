@@ -37,10 +37,30 @@ class NewAddress extends Component {
 				throw Error(latLongResponse.statusText);
 			}
 
+			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
+
+			const parsedZipInfo = await zipInfoResponse.json();
+
+			if(!zipInfoResponse.ok) {
+				throw Error(zipInfoResponse.statusText);
+			}
+
 			await this.setState({
 				latitude: parsedLatLong.results[0].geometry.location.lat,
-				longitude: parsedLatLong.results[0].geometry.location.lng
-			})
+				longitude: parsedLatLong.results[0].geometry.location.lng,
+				houseValue: (parsedZipInfo.item.AverageHouseValue/parsedZipInfo.item.IncomePerHousehold),
+				diversity: (parsedZipInfo.item.ZipCodePopulation/Math.max.apply(null, 
+					[
+						parsedZipInfo.item.WhitePop,
+						parsedZipInfo.item.BlackPop,
+						parsedZipInfo.item.HispanicPop,
+						parsedZipInfo.item.AsianPop,
+						parsedZipInfo.item.IndianPop,
+						parsedZipInfo.item.HawaiianPop,
+						parsedZipInfo.item.OtherPop
+					])),
+				medianAge: parsedZipInfo.item.MedianAge
+			});
 
 			const registerResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses`, {
 				method: 'POST',
