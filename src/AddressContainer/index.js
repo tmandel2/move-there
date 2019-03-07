@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import AddressShow from './AddressShow.js';
 
 class AddressContainer extends Component {
 	constructor(){
@@ -12,7 +13,9 @@ class AddressContainer extends Component {
 
 	render() {
 		return(
-			<div>THIS IS AN AddressContainer
+			<div>
+				THIS IS AN AddressContainer
+				<AddressShow />
 			</div>
 		)
 	}

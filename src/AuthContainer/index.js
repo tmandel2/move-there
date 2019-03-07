@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import Login from './login.js';
-import Registration from './registration.js';
+import Login from './Login.js';
+import Registration from './Registration.js';
 import { withRouter } from 'react-router-dom';
 
 class AuthContainer extends Component {
