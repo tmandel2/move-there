@@ -1,26 +1,33 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
+import { Route, Switch } from 'react-router-dom';
 import './App.css';
 
+const My404 = () => {
+  return (
+    <div>
+      You've Taken a Wrong Turn
+    </div>
+  )
+}
 class App extends Component {
+  constructor() {
+    super();
+
+    this.state = {
+
+    }
+  }
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    return(
+      <main>
+        <div>APP</div>
+       {/* <Switch>
+          <Route exact path="/" component={ AuthContainer }/>
+          <Route exact path="/users" component={ UserContainer }/>
+          <Route exact path="/addresses" component={ AddressContainer }/>
+          <Route component={ My404 }/>
+        </Switch>*/}
+      </main>
     );
   }
 }
