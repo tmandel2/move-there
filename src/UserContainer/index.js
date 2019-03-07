@@ -6,7 +6,10 @@ class UserContainer extends Component {
 		super();
 
 		this.state = {
-			user: {}
+			user: {
+				user: {},
+				addresses: []
+			}
 			
 		}
 	}
@@ -24,7 +27,10 @@ class UserContainer extends Component {
 			const userParsed = await response.json();
 			console.log(userParsed);
 			this.setState({
-				user: userParsed.user
+				user: {
+					user: userParsed.user,
+					addresses: userParsed.addresses
+				}
 			})
 		} catch(err) {
 			console.log(err);
@@ -32,9 +38,19 @@ class UserContainer extends Component {
 		}
 	}
 	render() {
+		const addressesList = this.state.user.addresses.map((address, i) => {
+			if(address) {
+				return <li key={i}>
+					{address.zipCode}
+				</li>
+			} else {
+				return null
+			}
+		})
 		return (
 			<div>User Container Found
-			{this.state.user.username}
+			{this.state.user.user.username}
+			{addressesList}
 			</div>
 		)
 	}
