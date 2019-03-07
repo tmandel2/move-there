@@ -41,7 +41,7 @@ class UserContainer extends Component {
 		const addressesList = this.state.user.addresses.map((address, i) => {
 			if(address) {
 				return <li key={i}>
-					{address.zipCode}
+					{address.streetNumber} {address.streetName}, {address.city}, {address.state} {address.zipCode}
 				</li>
 			} else {
 				return null
