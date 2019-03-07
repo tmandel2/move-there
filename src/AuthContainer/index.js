@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-// import Login from '../Login';
+import Login from './login.js';
 // import Register from '../Register';
 
 class AuthContainer extends Component {
@@ -12,7 +12,9 @@ class AuthContainer extends Component {
 	}
 	render() {
 		return (
-			<div>Authocontainer</div>
+			<div>Authocontainer
+				<Login />
+			</div>
 		)
 	}
 }
