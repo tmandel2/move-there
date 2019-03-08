@@ -8,7 +8,7 @@ import Header from './Header';
 
 const My404 = () => {
   return (
-    <div>
+    <div className="Four-of-Four">
       <img src="../404Cat.jpg" alt="404 Cat"/>
     </div>
   )

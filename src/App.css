@@ -46,3 +46,8 @@ header {
 	flex-direction: column;
 	align-items: center;
 }
+
+.Four-of-Four {
+	display: flex;
+	justify-content: center;
+}
