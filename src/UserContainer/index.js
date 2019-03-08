@@ -29,7 +29,9 @@ class UserContainer extends Component {
 			this.setState({
 				user: {
 					user: userParsed.user,
-					addresses: userParsed.addresses
+					addresses: userParsed.addresses.sort((a, b) => {
+						return a.id - b.id;
+					})
 				}
 			})
 		} catch(err) {
@@ -59,6 +61,7 @@ class UserContainer extends Component {
 			if(address) {
 				return <li key={i}>
 					{address.streetNumber} {address.streetName}, {address.city}, {address.state} {address.zipCode}
+					<button onClick={this.props.showAddress.bind(null, address.id)}>Show</button>
 					<button onClick={this.deleteAddress.bind(null, address.id)}>Delete</button>
 				</li>
 			} else {

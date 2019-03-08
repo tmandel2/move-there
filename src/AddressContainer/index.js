@@ -16,7 +16,7 @@ class AddressContainer extends Component {
 		return(
 			<div>
 				THIS IS AN AddressContainer
-				<AddressShow />
+				<AddressShow currentAddress={this.props.currentAddress}/>
 				<NewAddress username={this.props.username} _id={this.props._id} />
 			</div>
 		)

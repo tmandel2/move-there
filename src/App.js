@@ -19,7 +19,8 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       username: '',
-      _id: ''
+      _id: '',
+      currentAddress: {}
     }
   }
   logIn = (user) => {
@@ -32,13 +33,33 @@ class App extends Component {
     console.log(this.state);
     this.props.history.push('/users');
   }
+  showAddress = async (identity, e) => {
+    e.preventDefault();
+      try {
+        const response = await fetch(`${process.env.REACT_APP_ROUTE}addresses/${identity}`, {
+          credentials: 'include'
+        });
+        if(!response.ok){
+          throw Error(response.statusText);
+        }
+        const addressParsed = await response.json();
+        console.log(addressParsed);
+        this.setState({
+          currentAddress: addressParsed
+        })
+        this.props.history.push(`/addresses`);
+    } catch(err) {
+        console.log(err);
+        return err;
+    }
+  }
   render() {
     return(
       <main>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} />} />
-          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} />} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} />} />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} />} />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} currentAddress={this.state.currentAddress}/>} />
           <Route component={ My404 }/>
         </Switch>
       </main>
