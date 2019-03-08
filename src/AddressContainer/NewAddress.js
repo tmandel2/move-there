@@ -20,7 +20,8 @@ class NewAddress extends Component {
 			// Total population divided by the biggest demographic. Higher is good.
 			diversity: null,
 			// House Cost divided by Average Income. Higher is bad.
-			houseValue: null
+			houseValue: null,
+
 		}
 	}
 	handleChange = (e) => {
@@ -34,6 +35,7 @@ class NewAddress extends Component {
 			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.streetNumber}+${this.state.streetName.replace(/ /gi, '+')},+${this.state.city.replace(/ /gi, '+')},+${this.state.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
 
 			const parsedLatLong = await latLongResponse.json();
+			console.log(parsedLatLong, "lat long return");
 
 			if(!latLongResponse.ok) {
 				throw Error(latLongResponse.statusText);
@@ -42,6 +44,7 @@ class NewAddress extends Component {
 			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
+			console.log(parsedZipInfo, " Zip info response");
 
 			if(!zipInfoResponse.ok) {
 				throw Error(zipInfoResponse.statusText);
@@ -55,7 +58,7 @@ class NewAddress extends Component {
 			})
 
 			const parsedWalk = await walkScoreResponse.json();
-			console.log(parsedWalk);
+			console.log(parsedWalk, "Walk score return");
 
 			await this.setState({
 				latitude: parsedLatLong.results[0].geometry.location.lat,
@@ -89,7 +92,7 @@ class NewAddress extends Component {
 			}
 
 			const parsedResponse = await registerResponse.json();
-			console.log(parsedResponse);
+			console.log(parsedResponse, " what comes back from adding");
 		} catch(err) {
 			console.log(err);
 		}

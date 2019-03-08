@@ -37,11 +37,29 @@ class UserContainer extends Component {
 			return err;
 		}
 	}
+	deleteAddress = async (identity, e) => {
+		e.preventDefault();
+		try {
+			await fetch(`${process.env.REACT_APP_ROUTE}addresses/${identity}`, {
+				method: 'DELETE',
+				credentials: 'include'
+			});
+			this.setState({
+				user: {
+					user: this.state.user.user,
+					addresses: this.state.user.addresses.filter(address => address.id !== identity)
+				}
+			})
+		} catch(err) {
+			console.log(err);
+		}
+	}
 	render() {
 		const addressesList = this.state.user.addresses.map((address, i) => {
 			if(address) {
 				return <li key={i}>
 					{address.streetNumber} {address.streetName}, {address.city}, {address.state} {address.zipCode}
+					<button onClick={this.deleteAddress.bind(null, address.id)}>Delete</button>
 				</li>
 			} else {
 				return null
