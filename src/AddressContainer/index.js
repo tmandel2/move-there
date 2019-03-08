@@ -19,7 +19,9 @@ class AddressContainer extends Component {
 				THIS IS AN AddressContainer
 				<AddressShow currentAddress={this.props.currentAddress}/>
 				---------------------------------------------------
-				<NewAddress username={this.props.username} _id={this.props._id} />
+				{this.props.loggedIn ? 
+					<NewAddress username={this.props.username} _id={this.props._id} />
+					: null}
 				---------------------------------------------------
 				<AddressIndex />
 			</div>

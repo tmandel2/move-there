@@ -57,9 +57,9 @@ class App extends Component {
     return(
       <main>
         <Switch>
-          <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} />} />
-          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} />} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} currentAddress={this.state.currentAddress}/>} />
+          <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} loggedIn={this.state.loggedIn} />} />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} />} />
           <Route component={ My404 }/>
         </Switch>
       </main>

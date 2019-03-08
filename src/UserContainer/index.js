@@ -14,7 +14,10 @@ class UserContainer extends Component {
 		}
 	}
 	componentDidMount() {
-		this.getUser();
+		this.props.loggedIn ?
+			this.getUser()
+			: this.render()
+		
 	}
 	getUser = async () => {
 		try {
@@ -70,7 +73,9 @@ class UserContainer extends Component {
 		})
 		return (
 			<div>User Container Found
-			{this.state.user.user.username}
+			{this.props.loggedIn ? 
+				this.state.user.user.username
+				: 'You Are Not Logged In'}
 			{addressesList}
 			</div>
 		)
