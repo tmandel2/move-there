@@ -47,6 +47,16 @@ class NewAddress extends Component {
 				throw Error(zipInfoResponse.statusText);
 			}
 
+			const walkScoreResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/walkscore`, {
+				credentials: 'include',
+				headers: {
+					url: `http://api.walkscore.com/score?format=json&address=${this.state.streetNumber}%${this.state.streetName.replace(/ /gi, '%20')}%20${this.state.city.replace(/ /gi, '%20')}%20${this.state.state}%20${this.state.zipCode}&lat=${parsedLatLong.results[0].geometry.location.lat}&lon=${parsedLatLong.results[0].geometry.location.lng}&transit=1&bike=1&wsapikey=${process.env.REACT_APP_WALKSCOREKEY}`
+				}
+			})
+
+			const parsedWalk = await walkScoreResponse.json();
+			console.log(parsedWalk);
+
 			await this.setState({
 				latitude: parsedLatLong.results[0].geometry.location.lat,
 				longitude: parsedLatLong.results[0].geometry.location.lng,
@@ -61,7 +71,8 @@ class NewAddress extends Component {
 						parsedZipInfo.item.HawaiianPop,
 						parsedZipInfo.item.OtherPop
 					])),
-				medianAge: parsedZipInfo.item.MedianAge
+				medianAge: parsedZipInfo.item.MedianAge,
+				walkScore: parsedWalk.walkscore
 			});
 
 			const registerResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses`, {
