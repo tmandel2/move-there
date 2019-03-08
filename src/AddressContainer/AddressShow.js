@@ -8,13 +8,13 @@ class AddressShow extends Component {
 		this.state = {
 			youTubeURL: 'https://www.youtube.com/embed/98H5AN_vfOY',
 			wiki: {},
-			currentNewWeather: {},
+			currentNewWeather: 0,
 			currentOldWeather: 0,
 			loading: true
 		}
 	}
 	componentDidMount() {
-		Promise.all([this.getYouTube(),this.getOldWeather(),this.getWiki()]).then(
+		Promise.all([this.getYouTube(),this.getOldWeather(),this.getWiki(),this.getNewWeather()]).then(
 			this.setState({
 				loading: false
 			}));
@@ -64,6 +64,21 @@ class AddressShow extends Component {
 			}
 		}
 	}
+	getNewWeather = async () => {
+		try{
+			const newWeatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.props.currentAddress.zipCode},us&appid=${process.env.REACT_APP_OWMAPPID}`)
+
+			const parsedNewWeather = await newWeatherResponse.json();
+
+			this.setState({
+				currentNewWeather: Math.round((parsedNewWeather.main.temp - 273.15) * 9 / 5 + 32)
+			})
+
+			// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
+		} catch(err) {
+			console.log(err);
+		}
+	}
 	render() {
 
 		return (
@@ -76,6 +91,7 @@ class AddressShow extends Component {
 						<p>{this.state.wiki.extract}</p>
 
 						<h2>It is currently {this.state.currentOldWeather} at your current residence</h2>
+						<h2>It is currently {this.state.currentNewWeather} at your perspective place</h2>
 					</div>
 				}
 			</div>
