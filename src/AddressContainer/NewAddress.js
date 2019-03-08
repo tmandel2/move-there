@@ -60,7 +60,7 @@ class NewAddress extends Component {
 			const parsedWalk = await walkScoreResponse.json();
 			console.log(parsedWalk, "Walk score return");
 
-			await this.setState({
+			this.setState({
 				latitude: parsedLatLong.results[0].geometry.location.lat,
 				longitude: parsedLatLong.results[0].geometry.location.lng,
 				houseValue: (parsedZipInfo.item.AverageHouseValue/parsedZipInfo.item.IncomePerHousehold),

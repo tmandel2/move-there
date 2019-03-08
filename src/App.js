@@ -4,6 +4,7 @@ import './App.css';
 import AuthContainer from './AuthContainer';
 import UserContainer from './UserContainer';
 import AddressContainer from './AddressContainer';
+import Header from './Header';
 
 const My404 = () => {
   return (
@@ -56,6 +57,9 @@ class App extends Component {
   render() {
     return(
       <main>
+        <header>
+          <Header />
+        </header>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
           <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} loggedIn={this.state.loggedIn} />} />
