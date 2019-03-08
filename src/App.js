@@ -58,7 +58,7 @@ class App extends Component {
     return(
       <main>
         <header>
-          <Header showAddress={this.showAddress} history={this.props.history} />
+          <Header showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn} />
         </header>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
