@@ -17,10 +17,13 @@ class AddressShow extends Component {
 			const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&q=${this.props.currentAddress.city}+${this.props.currentAddress.state}+tour&safeSearch=moderate&order=relevance&key=${process.env.REACT_APP_GOOGLEKEY}`);
 
 			const parsedYoutube = await youtubeResponse.json();
-
-			this.setState({
-				youTubeURL: `https://www.youtube.com/embed/${parsedYoutube.items[0].id.videoId}`
-			})
+			this.props.currentAddress.city ?
+				this.setState({
+					youTubeURL: `https://www.youtube.com/embed/${parsedYoutube.items[0].id.videoId}`
+				})
+				: this.setState({
+					youTubeURL: `https://www.youtube.com/embed/98H5AN_vfOY`
+				})
 
 		} catch(err) {
 			console.log(err);
@@ -31,7 +34,7 @@ class AddressShow extends Component {
 			<div>
 				Address AdressShow
 				{this.props.currentAddress.id} {this.props.currentAddress.walkScore}{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}
-				<iframe width="300" height="200" src={this.state.youTubeURL}></iframe>
+				<iframe title='tour video' width="300" height="200" src={this.state.youTubeURL}></iframe>
 			</div>
 		)
 	}
