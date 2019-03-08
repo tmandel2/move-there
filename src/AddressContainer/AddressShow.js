@@ -91,8 +91,8 @@ class AddressShow extends Component {
 						<p>{this.state.wiki.extract}</p>
 						<h4>Courtesy WikiMedia</h4>
 
-						<h2>It is currently {this.state.currentOldWeather} at your current residence</h2>
-						<h2>It is currently {this.state.currentNewWeather} at your perspective place</h2>
+						{this.props.loggedIn ? <h2>It is currently {this.state.currentOldWeather}&deg; F at your current residence</h2> : null}
+						<h2>It is currently {this.state.currentNewWeather}&deg; F at your perspective place</h2>
 					</div>
 				}
 			</div>

@@ -33,6 +33,10 @@ button:hover {
 	box-shadow: 1px 1px 2px red;
 }
 
+header {
+	text-align: center;
+}
+
 .Address-Show {
 	display: flex;
 }
