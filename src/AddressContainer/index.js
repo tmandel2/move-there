@@ -41,10 +41,8 @@ class AddressContainer extends Component {
 				{this.props.loggedIn ? 
 					<button onClick={this.showNew}>Make a New Address</button>
 					: null}
-				<button onClick={this.props.showIndex}>Index of Addresses</button>
-				<button onClick={this.showShow}>Show Address</button>
 				{this.props.currentAddress.id ? 
-					<AddressShow currentAddress={this.props.currentAddress} showAddress={this.props.showAddress}/>
+					<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress}/>
 					: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>}
 				{this.state.new ? <NewAddress username={this.props.username} _id={this.props._id} />
 					: null}
