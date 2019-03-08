@@ -2,3 +2,43 @@ body {
     background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),url('./images/bricktown.jpg');
     background-size: cover;
 }
+
+p {
+	text-align: center;
+}
+
+iframe {
+	width: 600px;
+	height: 400px;
+}
+
+li {
+	list-style: none;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+button {
+	width: 80px;
+	margin: 0 5px;
+	border-radius: 10px;
+	border: 1px solid black;
+}
+
+button:hover {
+	box-shadow: 1px 1px 2px red;
+}
+
+.Address-Show {
+	display: flex;
+}
+
+.Address-Info {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

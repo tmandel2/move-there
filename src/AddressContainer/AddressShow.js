@@ -22,7 +22,7 @@ class AddressShow extends Component {
 	}
 	getYouTube = async () => {
 		try{
-			const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&q=${this.props.currentAddress.city}+${this.props.currentAddress.state}+tour&safeSearch=moderate&order=relevance&key=${process.env.REACT_APP_GOOGLEKEY}`);
+			const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&type=video&videoEmbeddable=true&maxResults=1&q=${this.props.currentAddress.city}+${this.props.currentAddress.state}+tour&safeSearch=moderate&order=relevance&key=${process.env.REACT_APP_GOOGLEKEY}`);
 			
 			const parsedYoutube = await youtubeResponse.json();
 
@@ -82,13 +82,14 @@ class AddressShow extends Component {
 	render() {
 
 		return (
-			<div>
+			<div className='Address-Show'>
 				{this.state.loading ? 
 					<h1>LOADING</h1>
-					: <div>
+					: <div className='Address-Info'>
 						ID: {this.props.currentAddress.id} WALKSCORE: {this.props.currentAddress.walkScore}<br/>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}<br/>
-						<iframe title='tour video' width="300" height="200" src={this.state.youTubeURL}></iframe>
+						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
 						<p>{this.state.wiki.extract}</p>
+						<h4>Courtesy WikiMedia</h4>
 
 						<h2>It is currently {this.state.currentOldWeather} at your current residence</h2>
 						<h2>It is currently {this.state.currentNewWeather} at your perspective place</h2>

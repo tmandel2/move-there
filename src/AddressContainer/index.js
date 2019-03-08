@@ -38,14 +38,13 @@ class AddressContainer extends Component {
 	render() {
 		return(
 			<div>
+				<NewAddress username={this.props.username} _id={this.props._id} />
 				{this.props.loggedIn ? 
 					<button onClick={this.showNew}>Make a New Address</button>
 					: null}
 				{this.props.currentAddress.id ? 
 					<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress}/>
 					: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>}
-				{this.state.new ? <NewAddress username={this.props.username} _id={this.props._id} />
-					: null}
 			</div>
 		)
 	}
