@@ -23,7 +23,7 @@ class AuthContainer extends Component {
 	}
 	render() {
 		return (
-			<div>Authocontainer
+			<div>
 				{this.state.showRegistration ? 
 					<Registration logIn={this.props.logIn} hideReg={this.hideReg} history={this.props.history}/> : 
 					<Login logIn={this.props.logIn} showReg={this.showReg} history={this.props.history}/>

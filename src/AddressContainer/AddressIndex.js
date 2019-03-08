@@ -46,7 +46,6 @@ class AddressIndex extends Component {
 		})
 		return(
 			<div>
-				This is address AddressIndex
 				{addressesList}
 			</div>
 		)

@@ -72,7 +72,7 @@ class UserContainer extends Component {
 			}
 		})
 		return (
-			<div>User Container Found
+			<div>
 			{this.props.loggedIn ? 
 				this.state.user.user.username
 				: 'You Are Not Logged In'}

@@ -54,7 +54,7 @@ class Registration extends Component {
 
 	render() {
 		return (
-			<div>REGISTRATION
+			<div>
 				<form onSubmit={this.handleSubmit}>
 					<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
 					<input type='text' name='email' onChange={this.handleChange} placeholder='Enter Email' />

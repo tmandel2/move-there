@@ -13,20 +13,27 @@ class Header extends Component {
 		}
 	}
 	goToAddresses = () => {
+		this.props.showIndex();
 		this.props.history.push('/addresses');
 	}
 	goToUserPage = () => {
 		this.props.history.push('/users');
 	}
+	goToHome = () => {
+		this.props.history.push('/');
+	}
 	render() {
 		return(
-			<div>
-				<h1>THIS IS A HEADER</h1>
-				<button onClick={this.goToAddresses}>See Addresses</button>
-				{this.props.loggedIn ?
-					<button onClick={this.goToUserPage}>Go to Profile</button>
-					: null }
-			</div>
+			<header>
+				<h1>Move There?</h1>
+				<nav>
+					<button onClick={this.goToAddresses}>See Addresses</button>
+					{this.props.loggedIn ?
+						<button onClick={this.goToUserPage}>Go to Profile</button>
+						: null }
+					<button onClick={this.goToHome}>Go Home Page</button>
+				</nav>
+			</header>
 		)
 	}
 }

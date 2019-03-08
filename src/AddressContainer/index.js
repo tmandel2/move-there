@@ -9,21 +9,45 @@ class AddressContainer extends Component {
 		super();
 
 		this.state = {
-
+			index: false,
+			show: true,
+			new: false
 		}
 	}
-
+	showShow = () => {
+		this.setState({
+			index: false,
+			show: true,
+			new: false
+		})
+	}
+	showIndex = () => {
+		this.setState({
+			index: true,
+			show: false,
+			new: false
+		})
+	}
+	showNew = () => {
+		this.setState({
+			index:false,
+			show: false,
+			new: true
+		})
+	}
 	render() {
 		return(
 			<div>
-				THIS IS AN AddressContainer
-				<AddressShow currentAddress={this.props.currentAddress}/>
-				---------------------------------------------------
 				{this.props.loggedIn ? 
-					<NewAddress username={this.props.username} _id={this.props._id} />
+					<button onClick={this.showNew}>Make a New Address</button>
 					: null}
-				---------------------------------------------------
-				<AddressIndex showAddress={this.props.showAddress}/>
+				<button onClick={this.props.showIndex}>Index of Addresses</button>
+				<button onClick={this.showShow}>Show Address</button>
+				{this.props.currentAddress.id ? 
+					<AddressShow currentAddress={this.props.currentAddress} showAddress={this.props.showAddress}/>
+					: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>}
+				{this.state.new ? <NewAddress username={this.props.username} _id={this.props._id} />
+					: null}
 			</div>
 		)
 	}

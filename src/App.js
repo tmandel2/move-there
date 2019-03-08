@@ -44,26 +44,28 @@ class App extends Component {
           throw Error(response.statusText);
         }
         const addressParsed = await response.json();
-        console.log(addressParsed);
         this.setState({
           currentAddress: addressParsed
         })
         this.props.history.push(`/addresses`);
     } catch(err) {
         console.log(err);
-        return err;
     }
+  }
+  showIndex = () => {
+    console.log('Show index clicked');
+    this.setState({
+      currentAddress: {}
+    })
   }
   render() {
     return(
       <main>
-        <header>
-          <Header showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn} />
-        </header>
+        <Header showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} />
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.username} _id={this.state._id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
-          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} loggedIn={this.state.loggedIn} />} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} />} />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.username} _id={this.state._id} history={this.props.history} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} />} />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.username} _id={this.state._id} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} />} />
           <Route component={ My404 }/>
         </Switch>
       </main>
