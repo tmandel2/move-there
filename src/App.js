@@ -8,7 +8,7 @@ import AddressContainer from './AddressContainer';
 const My404 = () => {
   return (
     <div>
-      <img src="404Cat.jpg" alt="404 Cat"/>
+      <img src="../404Cat.jpg" alt="404 Cat"/>
     </div>
   )
 }
