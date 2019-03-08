@@ -38,6 +38,7 @@ class AddressIndex extends Component {
 			if(address) {
 				return <li key={i}>
 					{address.streetNumber} {address.streetName}, {address.city}, {address.state} {address.zipCode}
+					<button onClick={this.props.showAddress.bind(null, address.id)}>Show</button>
 				</li>
 			} else {
 				return null

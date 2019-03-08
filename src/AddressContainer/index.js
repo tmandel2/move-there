@@ -23,7 +23,7 @@ class AddressContainer extends Component {
 					<NewAddress username={this.props.username} _id={this.props._id} />
 					: null}
 				---------------------------------------------------
-				<AddressIndex />
+				<AddressIndex showAddress={this.props.showAddress}/>
 			</div>
 		)
 	}
