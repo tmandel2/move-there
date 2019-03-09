@@ -1,6 +1,8 @@
 body {
     background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),url('./images/bricktown.jpg');
     background-size: cover;
+    /*font-family: 'Proza Libre', sans-serif;*/
+    font-family: 'Sansita', sans-serif;
 }
 
 p {
@@ -27,6 +29,7 @@ button {
 	margin: 0 5px;
 	border-radius: 10px;
 	border: 1px solid black;
+	font-family: 'Sansita', sans-serif;
 }
 
 button:hover {
@@ -35,6 +38,14 @@ button:hover {
 
 header {
 	text-align: center;
+}
+
+input {
+	    font-family: 'Sansita', sans-serif;
+}
+
+h1 {
+	font-size: 48px;
 }
 
 .Address-Show {
