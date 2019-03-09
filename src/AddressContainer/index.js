@@ -43,7 +43,7 @@ class AddressContainer extends Component {
 					<button onClick={this.showNew}>Make a New Address</button>
 					: null}
 				{this.props.currentAddress.id ? 
-					<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress}/>
+					<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress} loggedIn={this.props.loggedIn}/>
 					: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>}
 			</div>
 		)

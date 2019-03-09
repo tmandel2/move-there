@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import MoveThereScore from './MoveThereScore.js';
 
 
 class AddressShow extends Component {
@@ -85,7 +86,11 @@ class AddressShow extends Component {
 			<div className='Address-Show'>
 				{this.state.loading ? 
 					<h1>LOADING</h1>
-					: <div className='Address-Info'>
+					: 
+					<div className='Address-Info'>
+						{this.props.loggedIn ? 
+						<MoveThereScore />
+						: null}
 						ID: {this.props.currentAddress.id} WALKSCORE: {this.props.currentAddress.walkScore}<br/>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}<br/>
 						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
 						<p>{this.state.wiki.extract}</p>
