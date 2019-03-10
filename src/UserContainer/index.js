@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
+import EditUser from './EditUser.js';
 
 class UserContainer extends Component {
 	constructor() {
@@ -9,6 +10,9 @@ class UserContainer extends Component {
 			user: {
 				user: {},
 				addresses: []
+			},
+			userToEdit: {
+				user: {}
 			}
 			
 		}
@@ -35,6 +39,9 @@ class UserContainer extends Component {
 					addresses: userParsed.addresses.sort((a, b) => {
 						return a.id - b.id;
 					})
+				},
+				userToEdit: {
+					user: userParsed.user
 				}
 			})
 		} catch(err) {
@@ -59,6 +66,42 @@ class UserContainer extends Component {
 			console.log(err);
 		}
 	}
+	handleChange = (e) => {
+		this.setState({
+			userToEdit: {
+				user: {
+					...this.state.userToEdit.user,
+					[e.target.name]: e.target.value
+				}
+			}
+		})
+	}
+	handleSubmit = async (e) => {
+		e.preventDefault();
+		try {
+			console.log(this.state.userToEdit.user);
+			const editResponse = await fetch(`${process.env.REACT_APP_ROUTE}users/${this.props._id}`, {
+				method: 'PUT',
+				credentials: 'include',
+				body: JSON.stringify(this.state.userToEdit.user),
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			})
+
+			if(!editResponse.ok) {
+				throw Error(editResponse.statusText);
+			}
+
+			const parsedResponse = await editResponse.json();
+			this.props.logIn(parsedResponse);
+			// this.props.history.push('/users');
+
+		} catch(err) {
+			console.log(err);
+		}
+	}
+
 	render() {
 		const addressesList = this.state.user.addresses.map((address, i) => {
 			if(address) {
@@ -71,12 +114,17 @@ class UserContainer extends Component {
 				return null
 			}
 		})
+		console.log(this.state.user);
 		return (
 			<div>
-			{this.props.loggedIn ? 
-				this.state.user.user.username
-				: 'You Are Not Logged In'}
-			{addressesList}
+				{this.props.loggedIn ? 
+					this.state.user.user.username
+					: 'You Are Not Logged In'}
+				{addressesList}
+				{this.state.user.user.username ?
+					<EditUser user={this.state.userToEdit} logIn={this.props.logIn} _id={this.props._id} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
+					: null 
+				}
 			</div>
 		)
 	}

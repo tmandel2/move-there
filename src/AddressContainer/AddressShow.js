@@ -133,7 +133,7 @@ class AddressShow extends Component {
 
 
 						{this.props.loggedIn ? <h2>It is currently {this.state.currentOldWeather}&deg; F at your current residence</h2> : null}
-						<h2>It is currently {this.state.currentNewWeather}&deg; F at your perspective place</h2>
+						<h2>It is currently {this.state.currentNewWeather}&deg; F at your prospective place</h2>
 						{this.props.user.nearbyAmenities ?
 							<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
 							: null
