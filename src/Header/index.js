@@ -33,8 +33,7 @@ class Header extends Component {
 							<button onClick={this.goToUserPage}>Go to Profile</button>
 							<button onClick={this.props.logout}>Logout</button>
 						</div>
-						: null }
-					<button onClick={this.goToHome}>Go Home Page</button>
+						: <button onClick={this.goToHome}>Login or Register</button>}
 				</nav>
 			</header>
 		)
