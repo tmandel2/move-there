@@ -9,17 +9,17 @@ class AddressShow extends Component {
 		this.state = {
 			youTubeURL: 'https://www.youtube.com/embed/98H5AN_vfOY',
 			wiki: {},
+			yelps: [],
 			currentNewWeather: 0,
 			currentOldWeather: 0,
 			loading: true
 		}
 	}
 	componentDidMount() {
-		Promise.all([this.getYouTube(),this.getOldWeather(),this.getWiki(),this.getNewWeather()]).then(
+		Promise.all([this.getYouTube(),this.getOldWeather(),this.getWiki(),this.getNewWeather(),this.getYelp()]).then(
 			this.setState({
 				loading: false
 			}));
-		// this.getNewWeather();
 	}
 	getYouTube = async () => {
 		try{
@@ -78,6 +78,27 @@ class AddressShow extends Component {
 			// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
 		} catch(err) {
 			console.log(err);
+		}
+	}
+	getYelp = async () => {
+		if(this.props.user.nearbyAmenities){
+			try{
+				console.log("YELP");
+				const yelpResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/yelp`, {
+					credentials: 'include',
+					headers: {
+						url: `https://api.yelp.com/v3/businesses/search?latitude=${this.props.currentAddress.latitude}&longitude=${this.props.currentAddress.longitude}&radius=16000&term=${this.props.user.nearbyAmenities}`,
+						key: `${process.env.REACT_APP_YELPKEY}`
+					}
+				})
+				const parsedYelp = await yelpResponse.json();
+				console.log(parsedYelp, "Yelp return");
+				this.setState({
+					yelps: parsedYelp.businesses
+				})
+			} catch(err) {
+				console.log(err);
+			}
 		}
 	}
 	render() {
