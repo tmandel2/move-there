@@ -87,7 +87,7 @@ class AddressShow extends Component {
 				const yelpResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/yelp`, {
 					credentials: 'include',
 					headers: {
-						url: `https://api.yelp.com/v3/businesses/search?latitude=${this.props.currentAddress.latitude}&longitude=${this.props.currentAddress.longitude}&radius=16000&term=${this.props.user.nearbyAmenities}`,
+						url: `https://api.yelp.com/v3/businesses/search?latitude=${this.props.currentAddress.latitude}&longitude=${this.props.currentAddress.longitude}&radius=16000&term=${this.props.user.nearbyAmenities}&sort_by=distance`,
 						key: `${process.env.REACT_APP_YELPKEY}`
 					}
 				})
@@ -102,7 +102,13 @@ class AddressShow extends Component {
 		}
 	}
 	render() {
-
+		const streetDeSpaced = this.props.currentAddress.streetName.replace(' ', '-');
+		const cityDeSpaced = this.props.currentAddress.city.replace(' ', '-');
+		const stateDeSpaced = this.props.currentAddress.state.replace(' ', '-');
+		const walkScoreSrcWalk = `//pp.walk.sc/badge/walk/${this.props.currentAddress.streetNumber}-${streetDeSpaced}-${cityDeSpaced}-${stateDeSpaced}-${this.props.currentAddress.zipCode}.svg`;
+		const walkScoreSrcTrans = `//pp.walk.sc/badge/transit/${this.props.currentAddress.streetNumber}-${streetDeSpaced}-${cityDeSpaced}-${stateDeSpaced}-${this.props.currentAddress.zipCode}.svg`;
+		const walkScoreSrcBike = `//pp.walk.sc/badge/bike/${this.props.currentAddress.streetNumber}-${streetDeSpaced}-${cityDeSpaced}-${stateDeSpaced}-${this.props.currentAddress.zipCode}.svg`;
+		const WalkScoreLink = `https://www.walkscore.com/score/${this.props.currentAddress.streetNumber}-${streetDeSpaced}-${cityDeSpaced}-${stateDeSpaced}-${this.props.currentAddress.zipCode}.svg?utm_source=badge&utm_medium=responsive&utm_campaign=badge`;
 		return (
 			<div className='Address-Show'>
 				{this.state.loading ? 
@@ -112,13 +118,20 @@ class AddressShow extends Component {
 						{this.props.loggedIn ? 
 						<MoveThereScore />
 						: null}
-						ID: {this.props.currentAddress.id} WALKSCORE: {this.props.currentAddress.walkScore}<br/>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}<br/>
-						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
+						ID: {this.props.currentAddress.id}<br/>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}<br/>
 						<p>{this.state.wiki.extract}</p>
 						<h4>Courtesy WikiMedia</h4>
 
 						{this.props.loggedIn ? <h2>It is currently {this.state.currentOldWeather}&deg; F at your current residence</h2> : null}
 						<h2>It is currently {this.state.currentNewWeather}&deg; F at your perspective place</h2>
+						<div>
+							<a rel="nofollow" href={WalkScoreLink}>
+								<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
+								<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
+								<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>
+							</a>
+						</div>
+						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>	
 					</div>
 				}
 			</div>
