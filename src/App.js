@@ -32,6 +32,23 @@ class App extends Component {
     console.log(this.state);
     this.props.history.push('/users');
   }
+  logout = async ()=>{
+    try{
+      await fetch(`${process.env.REACT_APP_BACKEND}auth/logout`, {
+        method: 'GET',
+        credentials: 'include'
+      })
+      this.setState({
+        user: {},
+        loggedIn: false,
+        currentAddress: {}
+      })
+      this.props.history.push('/')
+    }catch(err){
+      console.log(err);
+      return err;
+    }
+  }
   showAddress = async (identity, e) => {
     e.preventDefault();
       try {
@@ -59,7 +76,7 @@ class App extends Component {
   render() {
     return(
       <main>
-        <Header showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} />
+        <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} />
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.user.username} _id={this.state.user.id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
           <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} />} />

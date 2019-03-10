@@ -29,7 +29,10 @@ class Header extends Component {
 				<nav>
 					<button onClick={this.goToAddresses}>See Addresses</button>
 					{this.props.loggedIn ?
-						<button onClick={this.goToUserPage}>Go to Profile</button>
+						<div>
+							<button onClick={this.goToUserPage}>Go to Profile</button>
+							<button onClick={this.props.logout}>Logout</button>
+						</div>
 						: null }
 					<button onClick={this.goToHome}>Go Home Page</button>
 				</nav>
