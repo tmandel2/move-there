@@ -5,40 +5,47 @@ class Registration extends Component {
 	constructor() {
 		super();
 		this.state = {
-			username: '',
-			password: '',
-			email: '',
-			currentZip: null,
-			walkabilityImportance: null,
-			medianDesiredAge: null,
-			medianAgeImportance: null,
-			diversityImportance: null,
-			houseValueImportance: null,
-			desiredWeather: null,
-			weatherImportance: null,
-			nearbyAmenities: '',
-			amenitiesImportance: null
+			user: {
+				username: '',
+				password: '',
+				email: '',
+				currentZip: null,
+				walkabilityImportance: null,
+				medianDesiredAge: null,
+				medianAgeImportance: null,
+				diversityImportance: null,
+				houseValueImportance: null,
+				desiredWeather: null,
+				weatherImportance: null,
+				nearbyAmenities: '',
+				amenitiesImportance: null
+			},
+			message: ''
 		}
 	}
 	handleChange = (e) => {
 		this.setState({
-			[e.target.name]: e.target.value
+			user:{
+				[e.target.name]: e.target.value
+			}
 		})
 	}
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log(this.state.user);
 			const registerResponse = await fetch(`${process.env.REACT_APP_ROUTE}auth/registration`, {
 				method: 'POST',
 				credentials: 'include',
-				body: JSON.stringify(this.state),
+				body: JSON.stringify(this.state.user),
 				headers: {
 					'Content-Type': 'application/json'
 				}
 			})
 
 			if(!registerResponse.ok) {
+				this.setState({
+					message: 'Try a Different Username or Email'
+				})
 				throw Error(registerResponse.statusText);
 			}
 
@@ -55,6 +62,7 @@ class Registration extends Component {
 	render() {
 		return (
 			<div>
+				<h2>{this.state.message}</h2>
 				<form onSubmit={this.handleSubmit}>
 					<input type='text' name='username' onChange={this.handleChange} placeholder='Enter Username' />
 					<input type='text' name='email' onChange={this.handleChange} placeholder='Enter Email' />

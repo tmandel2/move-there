@@ -149,6 +149,9 @@ class AddressShow extends Component {
 						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
 						<p>{this.state.wiki.extract}</p>
 						<h4>Courtesy WikiMedia</h4>
+						{this.props.currentAddress.user.id === this.props.user.id ?
+							<button onClick={this.props.showEdit}>Edit This Address</button>
+							: null}
 					</div>
 				}
 			</div>
