@@ -43,7 +43,7 @@ const EditUser = (props) => {
 					<input type='number' name='houseValueImportance' min='1' max='5' onChange={props.handleChange} value={props.user.user.houseValueImportance} />
 				</div>
 				<div className='desiredWeather'>
-					<label htmlFor='desiredWeather'>Warmer or Colder?</label>
+					<label htmlFor='desiredWeather'>Desired Weather: 1 for Colder, 2 for the Same, 3 for Warmer</label>
 					<input type='number' name='desiredWeather' onChange={props.handleChange} value={props.user.user.desiredWeather} />
 				</div>
 				<div className='weatherImportance'>

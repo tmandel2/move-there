@@ -23,7 +23,7 @@ class AddressShow extends Component {
 	}
 	getYouTube = async () => {
 		try{
-			const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&type=video&videoEmbeddable=true&maxResults=1&q=${this.props.currentAddress.city}+${this.props.currentAddress.state}+tour&safeSearch=moderate&order=relevance&key=${process.env.REACT_APP_GOOGLEKEY}`);
+			const youtubeResponse = await fetch(`https://www.googleapis.com/youtube/v3/search?part=id&type=video&videoEmbeddable=true&maxResults=1&q=${this.props.currentAddress.city}+${this.props.currentAddress.state}+fun&safeSearch=moderate&order=relevance&key=${process.env.REACT_APP_GOOGLEKEY}`);
 			
 			const parsedYoutube = await youtubeResponse.json();
 
@@ -83,7 +83,6 @@ class AddressShow extends Component {
 	getYelp = async () => {
 		if(this.props.user.nearbyAmenities){
 			try{
-				console.log("YELP");
 				const yelpResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/yelp`, {
 					credentials: 'include',
 					headers: {
@@ -92,7 +91,6 @@ class AddressShow extends Component {
 					}
 				})
 				const parsedYelp = await yelpResponse.json();
-				console.log(parsedYelp, "Yelp return");
 				this.setState({
 					yelps: parsedYelp.businesses
 				})
@@ -126,32 +124,35 @@ class AddressShow extends Component {
 					<h1>LOADING</h1>
 					: 
 					<div className='Address-Info'>
+
+						<h2>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}</h2>
+						{this.props.currentAddress.user.id === this.props.user.id ?
+							<button onClick={this.props.showEdit}>Edit This Address</button>
+							: null}
 						{this.props.loggedIn ? 
-						<MoveThereScore />
+						<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress}/>
 						: null}
-						ID: {this.props.currentAddress.id}<br/>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}<br/>
-
-
-						{this.props.loggedIn ? <h2>It is currently {this.state.currentOldWeather}&deg; F at your current residence</h2> : null}
-						<h2>It is currently {this.state.currentNewWeather}&deg; F at your prospective place</h2>
-						{this.props.user.nearbyAmenities ?
-							<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
-							: null
-						}
-						{yelpDistanceList}
+						<div className='weathers'>
+							{this.props.loggedIn ? <h2>It is {this.state.currentOldWeather}&deg; F where you are.</h2> : null}
+							<h2>It is {this.state.currentNewWeather}&deg; F here.</h2>
+						</div>
 						<div>
-							<a rel="nofollow" href={WalkScoreLink} target='_blank' rel='noopener noreferrer'>
+							<a href={WalkScoreLink} target='_blank' rel='noopener noreferrer nofollow'>
 								<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
 								<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
 								<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>
 							</a>
 						</div>
-						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
 						<p>{this.state.wiki.extract}</p>
 						<h4>Courtesy WikiMedia</h4>
-						{this.props.currentAddress.user.id === this.props.user.id ?
-							<button onClick={this.props.showEdit}>Edit This Address</button>
-							: null}
+						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
+						{this.props.user.nearbyAmenities ?
+							<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
+							: null
+						}
+						<ul className='yelp-list'>
+							{yelpDistanceList}
+						</ul>
 					</div>
 				}
 			</div>

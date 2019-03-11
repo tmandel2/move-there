@@ -1,17 +1,34 @@
-body {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)),url('./images/bricktown.jpg');
+html {
+    background: url('./images/bricktown.jpg') no-repeat center center fixed;
     background-size: cover;
     /*font-family: 'Proza Libre', sans-serif;*/
     font-family: 'Sansita', sans-serif;
+    overflow: scroll;
+}
+
+body {
+	background-color: rgba(255,255,255,.7);
+	font-family: 'Sansita', sans-serif;
+}
+
+nav {
+	display: flex;
+	justify-content: center;
 }
 
 p {
 	text-align: center;
+	font-size: 18px
 }
 
 iframe {
 	width: 600px;
 	height: 400px;
+}
+
+ul {
+	padding: 0;
+	margin: 0;
 }
 
 li {
@@ -25,15 +42,18 @@ li {
 }
 
 button {
-	width: 80px;
+	width: 160px;
+	height: 24px;
 	margin: 0 5px;
 	border-radius: 10px;
 	border: 1px solid black;
 	font-family: 'Sansita', sans-serif;
+	font-size: 16px;
 }
 
 button:hover {
 	box-shadow: 1px 1px 2px red;
+	cursor: pointer;
 }
 
 header {
@@ -46,6 +66,24 @@ input {
 
 h1 {
 	font-size: 48px;
+	text-align: center;
+	font-family: 'Sansita', sans-serif;
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 0
+}
+
+.user-name-head, .address-index-title {
+	border-bottom: 1px solid black;
+	border-top: 1px solid black;
+	padding-bottom: 5px;
+	text-transform: uppercase;
+}
+
+#move-there-header {
+	margin-top: 0;
 }
 
 .Address-Show {
@@ -58,6 +96,45 @@ h1 {
 	align-items: center;
 }
 
+.yelp-list {
+	columns: 3;
+	margin-top: 10px;
+}
+
+.yelp-list > li {
+	break-inside: avoid-column;
+	margin-bottom: 10px;
+}
+.weathers {
+	display: flex;
+	justify-content: space-around;
+	width: 100%;
+}
+
+.user-addresses, .all-addresses {
+	columns: 2;
+	margin-top: 20px;
+}
+
+.user-addresses > li, .all-addresses > li {
+	margin-bottom: 20px;
+	break-inside: avoid-column;
+}
+
+.user-buttons {
+	display: flex;
+}
+
+.user-page {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.user-address-list {
+	margin-bottom: 10px;
+}
+
 .Four-of-Four {
 	display: flex;
 	flex-direction: column;
@@ -66,4 +143,19 @@ h1 {
 
 .Four-of-Four > img {
 	width: 600px;
+}
+
+.whole-user-page {
+	display: flex;
+	flex-direction: column;
+	align-items: space-between;
+}
+
+.whole-user-page > .edit-user-hid {
+	display: flex;
+	flex-direction: column;
+}
+
+.whole-user-page > .edit-user-hid > button {
+	align-self: center;
 }

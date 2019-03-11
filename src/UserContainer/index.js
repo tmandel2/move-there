@@ -128,13 +128,18 @@ class UserContainer extends Component {
 	render() {
 
 		return (
-			<div>
+			<div className='whole-user-page'>
 				{this.props.loggedIn ? 
-					this.state.user.user.username
-					: 'You Are Not Logged In'}
+					<h2 className='user-name-head'>{this.state.user.user.username}</h2>
+					: <h2>You Are Not Logged In</h2>}
 				{this.state.showEdit ?
 					<EditUser user={this.state.userToEdit} logIn={this.props.logIn} _id={this.props._id} handleChange={this.handleChange} handleSubmit={this.handleSubmit} undoEdit={this.undoEdit} deleteUser={this.deleteUser} />
-					: 	<ShowUser user={this.state.user} showAddress={this.props.showAddress} deleteAddress={this.deleteAddress} showEdit={this.showEdit} loggedIn={this.props.loggedIn}/>
+					: 	<div className='edit-user-hid'>
+							<ShowUser user={this.state.user} showAddress={this.props.showAddress} deleteAddress={this.deleteAddress} showEdit={this.showEdit} loggedIn={this.props.loggedIn}/>
+							{this.props.loggedIn ?
+								<button onClick={this.showEdit}>Edit User</button>
+								: null}
+						</div>
 				}
 			</div>
 		)

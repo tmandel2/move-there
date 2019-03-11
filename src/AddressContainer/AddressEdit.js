@@ -7,12 +7,12 @@ const AddressEdit = (props) => {
 
 	return(
 		<div>Edit Address
-			<form onSubmit={this.props.handleEditSubmit}>
-				<input type='text' name='streetNumber' onChange={this.props.handleEditChange} value={this.props.addressToEdit.streetNumber} />
-				<input type='text' name='streetName' onChange={this.props.handleEditChange} value={this.props.addressToEdit.streetName} />
-				<input type='text' name='city' onChange={this.props.handleEditChange} value={this.props.addressToEdit.city} />
-				<input type='text' name='state' onChange={this.props.handleEditChange} value={this.props.addressToEdit.state}/>
-				<input type='number' name='zipCode' onChange={this.props.handleEditChange} value={this.props.addressToEdit.zipCode} />
+			<form onSubmit={props.handleEditSubmit}>
+				<input type='text' name='streetNumber' onChange={props.handleEditChange} value={props.addressToEdit.streetNumber} />
+				<input type='text' name='streetName' onChange={props.handleEditChange} value={props.addressToEdit.streetName} />
+				<input type='text' name='city' onChange={props.handleEditChange} value={props.addressToEdit.city} />
+				<input type='text' name='state' onChange={props.handleEditChange} value={props.addressToEdit.state}/>
+				<input type='number' name='zipCode' onChange={props.handleEditChange} value={props.addressToEdit.zipCode} />
 				<button>Submit Edit</button>
 			</form>
 		</div>

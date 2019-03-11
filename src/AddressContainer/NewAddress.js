@@ -17,7 +17,7 @@ class NewAddress extends Component {
 			longitude: null,
 			walkScore: null,
 			medianAge: null,
-			// Total population divided by the biggest demographic. Higher is good.
+			// biggest demographic divided by total pop. Lower is good.
 			diversity: null,
 			// House Cost divided by Average Income. Higher is bad.
 			houseValue: null,
@@ -61,7 +61,7 @@ class NewAddress extends Component {
 				latitude: parsedLatLong.results[0].geometry.location.lat,
 				longitude: parsedLatLong.results[0].geometry.location.lng,
 				houseValue: (parsedZipInfo.item.AverageHouseValue/parsedZipInfo.item.IncomePerHousehold),
-				diversity: (parsedZipInfo.item.ZipCodePopulation/Math.max.apply(null, 
+				diversity: (Math.max.apply(null, 
 					[
 						parsedZipInfo.item.WhitePop,
 						parsedZipInfo.item.BlackPop,
@@ -70,7 +70,8 @@ class NewAddress extends Component {
 						parsedZipInfo.item.IndianPop,
 						parsedZipInfo.item.HawaiianPop,
 						parsedZipInfo.item.OtherPop
-					])),
+					])/
+					parsedZipInfo.item.ZipCodePopulation),
 				medianAge: parsedZipInfo.item.MedianAge,
 				walkScore: parsedWalk.walkscore
 			});
@@ -88,7 +89,7 @@ class NewAddress extends Component {
 				throw Error(registerResponse.statusText);
 			}
 
-			const parsedResponse = await registerResponse.json();
+			await registerResponse.json();
 
 			this.props.history.push('/users');
 

@@ -25,9 +25,9 @@ class Header extends Component {
 	render() {
 		return(
 			<header>
-				<h1>Move There?</h1>
+				<h1 id='move-there-header'>Move There?</h1>
 				<nav>
-					<button onClick={this.goToAddresses}>See Addresses</button>
+					<button onClick={this.goToAddresses}>See All Addresses</button>
 					{this.props.loggedIn ?
 						<div>
 							<button onClick={this.goToUserPage}>Go to Profile</button>

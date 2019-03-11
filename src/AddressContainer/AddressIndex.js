@@ -24,7 +24,6 @@ class AddressIndex extends Component {
 				throw Error(response.statusText);
 			}
 			const addressesParsed = await response.json();
-			console.log(addressesParsed);
 			this.setState({
 				addresses: addressesParsed
 			})
@@ -46,7 +45,10 @@ class AddressIndex extends Component {
 		})
 		return(
 			<div>
-				{addressesList}
+				<h2 className='address-index-title'>All Entered Addresses</h2>
+				<ul className='all-addresses'>
+					{addressesList}
+				</ul>
 			</div>
 		)
 	}

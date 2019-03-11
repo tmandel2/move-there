@@ -56,7 +56,6 @@ class AddressContainer extends Component {
 			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.addressToEdit.streetNumber}+${this.state.addressToEdit.streetName.replace(/ /gi, '+')},+${this.state.addressToEdit.city.replace(/ /gi, '+')},+${this.state.addressToEdit.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
 
 			const parsedLatLong = await latLongResponse.json();
-			console.log(parsedLatLong, "lat long return");
 
 			if(!latLongResponse.ok) {
 				throw Error(latLongResponse.statusText);
@@ -65,7 +64,6 @@ class AddressContainer extends Component {
 			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.addressToEdit.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
-			console.log(parsedZipInfo, " Zip info response");
 
 			if(!zipInfoResponse.ok) {
 				throw Error(zipInfoResponse.statusText);
@@ -79,7 +77,6 @@ class AddressContainer extends Component {
 			})
 
 			const parsedWalk = await walkScoreResponse.json();
-			console.log(parsedWalk, "Walk score return");
 
 			this.setState({
 				addressToEdit: {
@@ -87,7 +84,7 @@ class AddressContainer extends Component {
 					latitude: parsedLatLong.results[0].geometry.location.lat,
 					longitude: parsedLatLong.results[0].geometry.location.lng,
 					houseValue: (parsedZipInfo.item.AverageHouseValue/parsedZipInfo.item.IncomePerHousehold),
-					diversity: (parsedZipInfo.item.ZipCodePopulation/Math.max.apply(null, 
+					diversity: (Math.max.apply(null, 
 						[
 							parsedZipInfo.item.WhitePop,
 							parsedZipInfo.item.BlackPop,
@@ -96,7 +93,7 @@ class AddressContainer extends Component {
 							parsedZipInfo.item.IndianPop,
 							parsedZipInfo.item.HawaiianPop,
 							parsedZipInfo.item.OtherPop
-						])),
+						])/parsedZipInfo.item.ZipCodePopulation),
 					medianAge: parsedZipInfo.item.MedianAge,
 					walkScore: parsedWalk.walkscore
 				}
