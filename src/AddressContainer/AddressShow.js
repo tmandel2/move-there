@@ -113,7 +113,7 @@ class AddressShow extends Component {
 			if(yelp) {
 				return (
 					<li key={i}>
-						<a href={yelp.url}>{yelp.name}</a> is {Number((yelp.distance / 1609.344).toFixed(1))} miles away
+						<a href={yelp.url} target='_blank' rel='noopener noreferrer'>{yelp.name}</a> is {Number((yelp.distance / 1609.344).toFixed(1))} miles away
 					</li>
 				)
 			} else {
@@ -140,7 +140,7 @@ class AddressShow extends Component {
 						}
 						{yelpDistanceList}
 						<div>
-							<a rel="nofollow" href={WalkScoreLink}>
+							<a rel="nofollow" href={WalkScoreLink} target='_blank' rel='noopener noreferrer'>
 								<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
 								<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
 								<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>

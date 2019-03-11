@@ -34,7 +34,6 @@ class UserContainer extends Component {
 				throw Error(response.statusText);
 			}
 			const userParsed = await response.json();
-			console.log(userParsed);
 			this.setState({
 				user: {
 					user: userParsed.user,
@@ -81,7 +80,6 @@ class UserContainer extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			console.log(this.state.userToEdit.user);
 			const editResponse = await fetch(`${process.env.REACT_APP_ROUTE}users/${this.props._id}`, {
 				method: 'PUT',
 				credentials: 'include',

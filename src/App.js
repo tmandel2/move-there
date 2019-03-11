@@ -9,7 +9,8 @@ import Header from './Header';
 const My404 = () => {
   return (
     <div className="Four-of-Four">
-      <img src="../404Cat.jpg" alt="404 Cat"/>
+      <h1>404 Wrong Way! Here's My Cat...</h1>
+      <img src="../Max.jpg" alt="404 Cat"/>
     </div>
   )
 }
@@ -26,12 +27,10 @@ class App extends Component {
     }
   }
   logIn = (user) => {
-    console.log('LOGIN HIT');
     this.setState({
       loggedIn: true,
       user: user
     });
-    console.log(this.state);
     this.props.history.push('/users');
   }
   showNewAddress = () => {
@@ -74,7 +73,8 @@ class App extends Component {
         const addressParsed = await response.json();
         this.setState({
           currentAddress: addressParsed,
-          addressIndex: false
+          addressIndex: false,
+          newAddress: false
         })
         this.props.history.push(`/addresses`);
     } catch(err) {
