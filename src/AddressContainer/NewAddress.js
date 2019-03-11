@@ -108,7 +108,7 @@ class NewAddress extends Component {
 					<input type='number' name='zipCode' onChange={this.handleChange} placeholder='Zip Code' />
 					<button>Make Address</button>
 				</form>
-				<button onClick={this.props.history.push('/users')}>Cancel</button>
+				<button onClick={() => this.props.history.push('/users')}>Cancel</button>
 			</div>
 		)
 	}

@@ -91,11 +91,11 @@ class App extends Component {
   render() {
     return(
       <main>
-        <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} showNewAddress={this.showNewAddress}/>
+        <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn} showIndex={this.showIndex} showNewAddress={this.showNewAddress}/>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.user.username} _id={this.state.user.id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
-          <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} user={this.state.user} logIn={this.logIn} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} addressIndex={this.state.addressIndex} logout={this.logout} showNewAddress={this.showNewAddress}/>} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} showNewAddress={this.showNewAddress} newAddress={this.state.newAddress} addressIndex={this.state.addressIndex}/> } />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} newAddress={this.state.newAddress} addressIndex={this.state.addressIndex}/> } />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} user={this.state.user} logIn={this.logIn} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} addressIndex={this.state.addressIndex} logout={this.logout} /> } />
           <Route component={ My404 }/>
         </Switch>
       </main>

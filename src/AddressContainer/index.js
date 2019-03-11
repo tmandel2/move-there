@@ -12,34 +12,13 @@ class AddressContainer extends Component {
 		this.state = {
 			showEdit: false,
 			show: true,
-			new: false,
 			addressToEdit: {},
 		}
-	}
-	showShow = () => {
-		this.setState({
-			show: true,
-			new: false
-		})
 	}
 	showEdit = () => {
 		this.setState({
 			showEdit: true,
-			showShow: false,
 			addressToEdit: this.props.currentAddress
-		})
-	}
-	showNew = () => {
-		this.setState({
-			show: false,
-			new: true
-		})
-	}
-	showIndex = () => {
-		this.setState({
-			new: false,
-			showEdit: false,
-			showShow: false
 		})
 	}
 	handleEditChange = (e) => {
@@ -125,30 +104,28 @@ class AddressContainer extends Component {
 	render() {
 		return(
 			<div>
-				
-				{this.props.loggedIn ? 
-					<div> 
-						{this.props.newAddress ?
-							<NewAddress username={this.props.username} _id={this.props._id} showAddress={this.props.showAddress} updateAddress={this.props.updateAddress} showShow={this.showShow} />
-							: null }
-					</div>
-					: null}
+				{this.props.newAddress ? 
+					<NewAddress username={this.props.username} _id={this.props._id} showAddress={this.props.showAddress} updateAddress={this.props.updateAddress} history={this.props.history} />
+					: null
+				}
 				{this.props.currentAddress.id ? 
 					<div>
 						{this.state.showEdit ?
 							<AddressEdit addressToEdit={this.state.addressToEdit} handleEditChange={this.handleEditChange} handleEditSubmit={this.handleEditSubmit}/>
 							: <div>
 								{this.state.show ?
-									<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress} loggedIn={this.props.loggedIn} showEdit={this.showEdit} />
-									: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>
+									<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} loggedIn={this.props.loggedIn} showEdit={this.showEdit} />
+									: null
 								}
 							</div>
 						}
 					</div>
-					: null }
+					: null
+				}
 				{this.props.addressIndex ?
-					<AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>
-					: null }
+					<AddressIndex showAddress={this.props.showAddress} />
+					: null
+				}
 			</div>
 		)
 	}

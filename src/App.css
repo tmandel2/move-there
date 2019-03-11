@@ -113,7 +113,7 @@ h2 {
 
 .user-addresses, .all-addresses {
 	columns: 2;
-	margin-top: 20px;
+	margin: 20px 0;
 	column-gap: 50px;
 }
 
@@ -146,6 +146,42 @@ h2 {
 	width: 600px;
 }
 
+.login-form, .registration-form {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.registration-form {
+	width: 75%;
+	margin: auto;
+}
+
+.login-form > input {
+	width: 180px;
+	height: 40px;
+	text-align: center;
+	font-size: 24px;
+}
+
+.registration-form > div {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	font-size: 24px;
+	border-bottom: 1px dashed black;
+}
+
+.login {
+	display: flex;
+	flex-direction: column;
+	align-items: center
+}
+
+.login > button, .login-form > button {
+	margin-top: 20px
+}
+
 .whole-user-page {
 	display: flex;
 	flex-direction: column;
@@ -159,4 +195,20 @@ h2 {
 
 .whole-user-page > .edit-user-hid > button {
 	align-self: center;
+}
+
+.registration-form > div > input {
+	text-align: center;
+	height: 30px;
+	font-size: 16px
+}
+
+.input-numbers {
+	width: 80px;
+	align-self: flex-end;
+}
+
+.input-words {
+	width: 240px;
+	align-self: flex-end;
 }

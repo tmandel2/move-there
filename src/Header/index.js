@@ -22,6 +22,9 @@ class Header extends Component {
 	goToHome = () => {
 		this.props.history.push('/');
 	}
+	showNewAddress = () => {
+		this.props.showNewAddress();
+	}
 	render() {
 		return(
 			<header>
@@ -32,7 +35,7 @@ class Header extends Component {
 						<div>
 							<button onClick={this.goToUserPage}>Go to Profile</button>
 							<button onClick={this.props.logout}>Logout</button>
-							<button onClick={this.props.showNewAddress}>New Address</button>
+							<button onClick={this.showNewAddress}>New Address</button>
 						</div>
 						: <button onClick={this.goToHome}>Login or Register</button>}
 				</nav>
