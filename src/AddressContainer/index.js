@@ -11,15 +11,13 @@ class AddressContainer extends Component {
 
 		this.state = {
 			showEdit: false,
-			index: false,
 			show: true,
 			new: false,
-			addressToEdit: {}
+			addressToEdit: {},
 		}
 	}
 	showShow = () => {
 		this.setState({
-			index: false,
 			show: true,
 			new: false
 		})
@@ -31,21 +29,20 @@ class AddressContainer extends Component {
 			addressToEdit: this.props.currentAddress
 		})
 	}
-	showIndex = () => {
-		this.setState({
-			index: true,
-			show: false,
-			new: false
-		})
-	}
 	showNew = () => {
 		this.setState({
-			index:false,
 			show: false,
 			new: true
 		})
 	}
-	handleChange = (e) => {
+	showIndex = () => {
+		this.setState({
+			new: false,
+			showEdit: false,
+			showShow: false
+		})
+	}
+	handleEditChange = (e) => {
 		this.setState({
 			addressToEdit: {
 				...this.state.addressToEdit,
@@ -53,7 +50,7 @@ class AddressContainer extends Component {
 			}
 		})
 	}
-	handleSubmit = async (e) => {
+	handleEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
 			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.addressToEdit.streetNumber}+${this.state.addressToEdit.streetName.replace(/ /gi, '+')},+${this.state.addressToEdit.city.replace(/ /gi, '+')},+${this.state.addressToEdit.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
@@ -105,7 +102,6 @@ class AddressContainer extends Component {
 				}
 			});
 
-			console.log(this.state.addressToEdit, "After state set");
 			const editResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/${this.state.addressToEdit.id}`, {
 				method: 'PUT',
 				credentials: 'include',
@@ -120,8 +116,11 @@ class AddressContainer extends Component {
 			}
 
 			const parsedResponse = await editResponse.json();
-			console.log(parsedResponse);
+
 			this.props.updateAddress(parsedResponse);
+			this.setState({
+				showEdit: false
+			})
 		} catch(err) {
 			console.log(err);
 		}
@@ -129,16 +128,30 @@ class AddressContainer extends Component {
 	render() {
 		return(
 			<div>
-				<NewAddress username={this.props.username} _id={this.props._id} />
+				
 				{this.props.loggedIn ? 
-					<button onClick={this.showNew}>Make a New Address</button>
+					<div> 
+						{this.props.newAddress ?
+							<NewAddress username={this.props.username} _id={this.props._id} showAddress={this.props.showAddress} updateAddress={this.props.updateAddress} showShow={this.showShow} />
+							: null }
+					</div>
 					: null}
-				{this.props.currentAddress.id && this.state.show ? 
-					<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress} loggedIn={this.props.loggedIn} showEdit={this.showEdit} />
-					: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>}
-				{this.state.showEdit ?
-					<AddressEdit addressToEdit={this.state.addressToEdit} handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
-					: null}
+				{this.props.currentAddress.id ? 
+					<div>
+						{this.state.showEdit ?
+							<AddressEdit addressToEdit={this.state.addressToEdit} handleEditChange={this.handleEditChange} handleEditSubmit={this.handleEditSubmit}/>
+							: <div>
+								{this.state.show ?
+									<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} showAddress={this.props.showAddress} loggedIn={this.props.loggedIn} showEdit={this.showEdit} />
+									: <AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>
+								}
+							</div>
+						}
+					</div>
+					: null }
+				{this.props.addressIndex ?
+					<AddressIndex showAddress={this.props.showAddress} showShow={this.showShow}/>
+					: null }
 			</div>
 		)
 	}

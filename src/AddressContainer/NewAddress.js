@@ -35,7 +35,6 @@ class NewAddress extends Component {
 			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.streetNumber}+${this.state.streetName.replace(/ /gi, '+')},+${this.state.city.replace(/ /gi, '+')},+${this.state.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
 
 			const parsedLatLong = await latLongResponse.json();
-			console.log(parsedLatLong, "lat long return");
 
 			if(!latLongResponse.ok) {
 				throw Error(latLongResponse.statusText);
@@ -44,7 +43,6 @@ class NewAddress extends Component {
 			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
-			console.log(parsedZipInfo, " Zip info response");
 
 			if(!zipInfoResponse.ok) {
 				throw Error(zipInfoResponse.statusText);
@@ -58,7 +56,6 @@ class NewAddress extends Component {
 			})
 
 			const parsedWalk = await walkScoreResponse.json();
-			console.log(parsedWalk, "Walk score return");
 
 			this.setState({
 				latitude: parsedLatLong.results[0].geometry.location.lat,
@@ -92,7 +89,9 @@ class NewAddress extends Component {
 			}
 
 			const parsedResponse = await registerResponse.json();
-			console.log(parsedResponse, " what comes back from adding");
+
+			this.props.history.push('/users');
+
 		} catch(err) {
 			console.log(err);
 		}
@@ -106,7 +105,7 @@ class NewAddress extends Component {
 					<input type='text' name='city' onChange={this.handleChange} placeholder='Enter City' />
 					<input type='text' name='state' onChange={this.handleChange} placeholder='Enter State'/>
 					<input type='number' name='zipCode' onChange={this.handleChange} placeholder='Zip Code' />
-					<button>New Address</button>
+					<button>Make Address</button>
 				</form>
 			</div>
 		)

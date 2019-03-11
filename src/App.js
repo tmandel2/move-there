@@ -20,7 +20,9 @@ class App extends Component {
     this.state = {
       loggedIn: false,
       user: {},
-      currentAddress: {}
+      currentAddress: {},
+      newAddress: false,
+      addressIndex: true
     }
   }
   logIn = (user) => {
@@ -31,6 +33,13 @@ class App extends Component {
     });
     console.log(this.state);
     this.props.history.push('/users');
+  }
+  showNewAddress = () => {
+    this.setState({
+      newAddress: true,
+      addressIndex: false
+    })
+    this.props.history.push('/addresses');
   }
   updateAddress = (address) => {
     this.setState({
@@ -55,7 +64,6 @@ class App extends Component {
     }
   }
   showAddress = async (identity, e) => {
-    e.preventDefault();
       try {
         const response = await fetch(`${process.env.REACT_APP_ROUTE}addresses/${identity}`, {
           credentials: 'include'
@@ -65,7 +73,8 @@ class App extends Component {
         }
         const addressParsed = await response.json();
         this.setState({
-          currentAddress: addressParsed
+          currentAddress: addressParsed,
+          addressIndex: false
         })
         this.props.history.push(`/addresses`);
     } catch(err) {
@@ -73,19 +82,20 @@ class App extends Component {
     }
   }
   showIndex = () => {
-    console.log('Show index clicked');
     this.setState({
-      currentAddress: {}
+      currentAddress: {},
+      addressIndex: true,
+      newAddress: false
     })
   }
   render() {
     return(
       <main>
-        <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} />
+        <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn}  showIndex={this.showIndex} showNewAddress={this.showNewAddress}/>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.user.username} _id={this.state.user.id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
-          <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} user={this.state.user} logIn={this.logIn} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} logout={this.logout} />} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} /> } />
+          <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} user={this.state.user} logIn={this.logIn} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} addressIndex={this.state.addressIndex} logout={this.logout} showNewAddress={this.showNewAddress}/>} />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} showNewAddress={this.showNewAddress} newAddress={this.state.newAddress} addressIndex={this.state.addressIndex}/> } />
           <Route component={ My404 }/>
         </Switch>
       </main>
