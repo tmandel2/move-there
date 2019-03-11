@@ -12,7 +12,7 @@ const EditUser = (props) => {
 				</div>
 				<div className='email'>
 					<label htmlFor='email'>Email</label>
-					<input type='text' name='email' onChange={props.handleChange} value={props.user.user.email} />
+					<input type='email' name='email' onChange={props.handleChange} value={props.user.user.email} />
 				</div>
 				<div className='password'>
 					<label htmlFor='password'>Password</label>

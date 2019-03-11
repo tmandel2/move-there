@@ -114,6 +114,7 @@ h2 {
 .user-addresses, .all-addresses {
 	columns: 2;
 	margin-top: 20px;
+	column-gap: 50px;
 }
 
 .user-addresses > li, .all-addresses > li {

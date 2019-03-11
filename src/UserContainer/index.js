@@ -120,7 +120,6 @@ class UserContainer extends Component {
 				credentials: 'include'
 			});
 			this.props.logout();
-			// this.props.history.push('/');
 		} catch(err) {
 			console.log(err);
 		}
