@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 import EditUser from './EditUser.js';
+import ShowUser from './ShowUser.js';
 
 class UserContainer extends Component {
 	constructor() {
@@ -13,7 +14,8 @@ class UserContainer extends Component {
 			},
 			userToEdit: {
 				user: {}
-			}
+			},
+			showEdit: false
 			
 		}
 	}
@@ -94,36 +96,47 @@ class UserContainer extends Component {
 			}
 
 			const parsedResponse = await editResponse.json();
+			this.setState({
+				showEdit: false
+			})
 			this.props.logIn(parsedResponse);
-			// this.props.history.push('/users');
 
 		} catch(err) {
 			console.log(err);
 		}
 	}
-
-	render() {
-		const addressesList = this.state.user.addresses.map((address, i) => {
-			if(address) {
-				return <li key={i}>
-					{address.streetNumber} {address.streetName}, {address.city}, {address.state} {address.zipCode}
-					<button onClick={this.props.showAddress.bind(null, address.id)}>Show</button>
-					<button onClick={this.deleteAddress.bind(null, address.id)}>Delete</button>
-				</li>
-			} else {
-				return null
-			}
+	showEdit = () => {
+		this.setState({
+			showEdit: true
 		})
-		console.log(this.state.user);
+	}
+	undoEdit = () => {
+		this.setState({
+			showEdit: false
+		})
+	}
+	deleteUser = async () => {
+		try {
+			await fetch(`${process.env.REACT_APP_ROUTE}users/${this.state.user.user.id}`, {
+				method: 'DELETE',
+				credentials: 'include'
+			});
+			this.props.logout();
+			// this.props.history.push('/');
+		} catch(err) {
+			console.log(err);
+		}
+	}
+	render() {
+
 		return (
 			<div>
 				{this.props.loggedIn ? 
 					this.state.user.user.username
 					: 'You Are Not Logged In'}
-				{addressesList}
-				{this.state.user.user.username ?
-					<EditUser user={this.state.userToEdit} logIn={this.props.logIn} _id={this.props._id} handleChange={this.handleChange} handleSubmit={this.handleSubmit} />
-					: null 
+				{this.state.showEdit ?
+					<EditUser user={this.state.userToEdit} logIn={this.props.logIn} _id={this.props._id} handleChange={this.handleChange} handleSubmit={this.handleSubmit} undoEdit={this.undoEdit} deleteUser={this.deleteUser} />
+					: 	<ShowUser user={this.state.user} showAddress={this.props.showAddress} deleteAddress={this.deleteAddress} showEdit={this.showEdit} loggedIn={this.props.loggedIn}/>
 				}
 			</div>
 		)

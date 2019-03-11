@@ -26,6 +26,7 @@ class Registration extends Component {
 	handleChange = (e) => {
 		this.setState({
 			user:{
+				...this.state.user,
 				[e.target.name]: e.target.value
 			}
 		})
@@ -33,6 +34,7 @@ class Registration extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			console.log('What Im Sending', this.state.user);
 			const registerResponse = await fetch(`${process.env.REACT_APP_ROUTE}auth/registration`, {
 				method: 'POST',
 				credentials: 'include',
@@ -51,8 +53,6 @@ class Registration extends Component {
 
 			const parsedResponse = await registerResponse.json();
 			this.props.logIn(parsedResponse);
-			// this.props.history.push('/users');
-
 		} catch(err) {
 			console.log(err);
 		}
