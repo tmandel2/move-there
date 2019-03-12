@@ -12,14 +12,15 @@ class AddressShow extends Component {
 			yelps: [],
 			currentNewWeather: 0,
 			currentOldWeather: 0,
-			loading: true
+			loading: 0
 		}
 	}
 	componentDidMount() {
-		Promise.all([this.getYouTube(),this.getOldWeather(),this.getWiki(),this.getNewWeather(),this.getYelp()]).then(
-			this.setState({
-				loading: false
-			}));
+		this.getYouTube();
+		this.getOldWeather();
+		this.getWiki();
+		this.getNewWeather();
+		this.getYelp();
 	}
 	getYouTube = async () => {
 		try{
@@ -28,7 +29,8 @@ class AddressShow extends Component {
 			const parsedYoutube = await youtubeResponse.json();
 
 			this.setState({
-				youTubeURL: `https://www.youtube.com/embed/${parsedYoutube.items[0].id.videoId}`
+				youTubeURL: `https://www.youtube.com/embed/${parsedYoutube.items[0].id.videoId}`,
+				loading: this.state.loading + 1
 			})
 			// }
 		} catch(err) {
@@ -42,7 +44,8 @@ class AddressShow extends Component {
 			const parsedWiki = await wikiResponse.json();
 
 			this.setState({
-				wiki: parsedWiki
+				wiki: parsedWiki,
+				loading: this.state.loading + 1
 			})
 		} catch(err) {
 			console.log(err);
@@ -56,7 +59,8 @@ class AddressShow extends Component {
 				const parsedOldWeather = await oldWeatherResponse.json();
 
 				this.setState({
-					currentOldWeather: Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32)
+					currentOldWeather: Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32),
+					loading: this.state.loading + 1
 				})
 
 				// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
@@ -72,7 +76,8 @@ class AddressShow extends Component {
 			const parsedNewWeather = await newWeatherResponse.json();
 
 			this.setState({
-				currentNewWeather: Math.round((parsedNewWeather.main.temp - 273.15) * 9 / 5 + 32)
+				currentNewWeather: Math.round((parsedNewWeather.main.temp - 273.15) * 9 / 5 + 32),
+				loading: this.state.loading + 1
 			})
 
 			// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
@@ -92,7 +97,8 @@ class AddressShow extends Component {
 				})
 				const parsedYelp = await yelpResponse.json();
 				this.setState({
-					yelps: parsedYelp.businesses
+					yelps: parsedYelp.businesses,
+					loading: this.state.loading + 1
 				})
 			} catch(err) {
 				console.log(err);
@@ -120,7 +126,7 @@ class AddressShow extends Component {
 		})
 		return (
 			<div className='Address-Show'>
-				{this.state.loading ? 
+				{this.state.loading < 5 ? 
 					<h1>LOADING</h1>
 					: 
 					<div className='Address-Info'>
@@ -130,7 +136,7 @@ class AddressShow extends Component {
 							<button onClick={this.props.showEdit}>Edit This Address</button>
 							: null}
 						{this.props.loggedIn ? 
-						<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress}/>
+						<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress} currentNewWeather= {this.state.currentNewWeather} currentOldWeather = {this.state.currentOldWeather} />
 						: null}
 						<div className='weathers'>
 							{this.props.loggedIn ? <h2>It is {this.state.currentOldWeather}&deg; F where you are.</h2> : null}

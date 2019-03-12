@@ -216,3 +216,7 @@ h2 {
 	width: 240px;
 	align-self: flex-end;
 }
+
+.rating-hand {
+	height: 30px;
+}
