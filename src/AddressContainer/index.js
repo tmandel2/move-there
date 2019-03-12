@@ -16,8 +16,8 @@ class AddressContainer extends Component {
 		}
 	}
 	showEdit = () => {
+		this.props.showEditAddress();
 		this.setState({
-			showEdit: true,
 			addressToEdit: this.props.currentAddress
 		})
 	}
@@ -94,9 +94,10 @@ class AddressContainer extends Component {
 			const parsedResponse = await editResponse.json();
 
 			this.props.updateAddress(parsedResponse);
-			this.setState({
-				showEdit: false
-			})
+			this.props.showAddress(parsedResponse.id);
+			// this.setState({
+			// 	showEdit: false
+			// })
 		} catch(err) {
 			console.log(err);
 		}
@@ -110,10 +111,10 @@ class AddressContainer extends Component {
 				}
 				{this.props.currentAddress.id ? 
 					<div>
-						{this.state.showEdit ?
-							<AddressEdit addressToEdit={this.state.addressToEdit} handleEditChange={this.handleEditChange} handleEditSubmit={this.handleEditSubmit}/>
+						{this.props.showEdit ?
+							<AddressEdit addressToEdit={this.state.addressToEdit} handleEditChange={this.handleEditChange} handleEditSubmit={this.handleEditSubmit} showAddress={this.props.showAddress}/>
 							: <div>
-								{this.state.show ?
+								{this.props.showAddressScreen ?
 									<AddressShow user={this.props.user} currentAddress={this.props.currentAddress} loggedIn={this.props.loggedIn} showEdit={this.showEdit} />
 									: null
 								}

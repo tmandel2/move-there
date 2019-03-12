@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-// import geocoder from 'google-geocoder';
 
 
 class NewAddress extends Component {
@@ -99,8 +98,9 @@ class NewAddress extends Component {
 	}
 	render() {
 		return (
-			<div>NEW ADDRESS
-				<form onSubmit={this.handleSubmit}>
+			<div>
+				<h2>NEW ADDRESS</h2>
+				<form onSubmit={this.handleSubmit} className='new-address-form'>
 					<input type='text' name='streetNumber' onChange={this.handleChange} placeholder='Enter Street Number' />
 					<input type='text' name='streetName' onChange={this.handleChange} placeholder='Enter Street Name' />
 					<input type='text' name='city' onChange={this.handleChange} placeholder='Enter City' />

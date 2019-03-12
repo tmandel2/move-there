@@ -23,7 +23,9 @@ class App extends Component {
       user: {},
       currentAddress: {},
       newAddress: false,
-      addressIndex: true
+      addressIndex: true,
+      showEdit: false,
+      showAddressScreen: false
     }
   }
   logIn = (user) => {
@@ -36,7 +38,9 @@ class App extends Component {
   showNewAddress = () => {
     this.setState({
       newAddress: true,
-      addressIndex: false
+      addressIndex: false,
+      showEdit: false,
+      showAddressScreen: false
     })
     this.props.history.push('/addresses');
   }
@@ -74,7 +78,9 @@ class App extends Component {
         this.setState({
           currentAddress: addressParsed,
           addressIndex: false,
-          newAddress: false
+          newAddress: false,
+          showEdit: false,
+          showAddressScreen: true
         })
         this.props.history.push(`/addresses`);
     } catch(err) {
@@ -85,7 +91,17 @@ class App extends Component {
     this.setState({
       currentAddress: {},
       addressIndex: true,
-      newAddress: false
+      newAddress: false,
+      showEdit: false,
+      showAddressScreen: false
+    })
+  }
+  showEditAddress = () => {
+    this.setState({
+      addressIndex: false,
+      newAddress: false,
+      showEdit: true,
+      showAddressScreen: false
     })
   }
   render() {
@@ -94,7 +110,7 @@ class App extends Component {
         <Header logout={this.logout} showAddress={this.showAddress} history={this.props.history} loggedIn={this.state.loggedIn} showIndex={this.showIndex} showNewAddress={this.showNewAddress}/>
         <Switch>
           <Route exact path="/" render= {props => <AuthContainer username={this.state.user.username} _id={this.state.user.id} logIn={this.logIn} history={this.props.history} loggedIn={this.state.loggedIn} />} />
-          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} newAddress={this.state.newAddress} addressIndex={this.state.addressIndex}/> } />
+          <Route exact path="/addresses" render={props => <AddressContainer username={this.state.user.username} _id={this.state.user.id} user={this.state.user} history={this.props.history} currentAddress={this.state.currentAddress} loggedIn={this.state.loggedIn} showAddress={this.showAddress} showIndex={this.showIndex} updateAddress={this.updateAddress} newAddress={this.state.newAddress} addressIndex={this.state.addressIndex} showEdit={this.state.showEdit} showEditAddress={this.showEditAddress} showAddressScreen={this.state.showAddressScreen} /> } />
           <Route exact path="/users" render={props => <UserContainer username={this.state.user.username} _id={this.state.user.id} history={this.props.history} user={this.state.user} logIn={this.logIn} showAddress={this.showAddress} loggedIn={this.state.loggedIn} showIndex={this.showIndex} addressIndex={this.state.addressIndex} logout={this.logout} /> } />
           <Route component={ My404 }/>
         </Switch>
