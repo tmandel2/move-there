@@ -97,7 +97,7 @@ class MoveThereScore extends Component {
 					{this.state.ageSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
 					<li><span>It has a diversity index of {(this.props.currentAddress.diversity * 100).toFixed(2)}% majority population. Your importance for diversity was {this.props.user.diversityImportance}. Conclusion for you?
 					{this.state.diversitySuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
-					<li><span>Houses in the area are on average {this.props.currentAddress.houseValue} times the average income. Your importance was {this.props.user.houseValueImportance}. Conclusion for you?
+					<li><span>Houses in the area are on average {(this.props.currentAddress.houseValue).toFixed(2)} times the average income. Your importance was {this.props.user.houseValueImportance}. Conclusion for you?
 					{this.state.houseValueSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
 					<li><span>You want the weather to be {weather}. Conclusion for you?
 					{this.state.weatherSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
