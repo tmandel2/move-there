@@ -91,16 +91,16 @@ class MoveThereScore extends Component {
 		return (
 			<div>
 				<ul>
-					<li>Walkability is {this.props.currentAddress.walkScore}. Your importance was {this.props.user.walkabilityImportance}. Conclusion?
-					{this.state.walkSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</li>
-					<li>Median Age is {this.props.currentAddress.medianAge} compared to your desire for {this.props.user.medianDesiredAge}. Your importance was {this.props.user.medianAgeImportance}
-					{this.state.ageSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</li>
-					<li>It has a diversity index of {this.props.currentAddress.diversity}. Your importance was {this.props.user.diversityImportance}
-					{this.state.diversitySuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</li>
-					<li>Houses in the area are on average {this.props.currentAddress.houseValue} times the average income. Your importance was {this.props.user.houseValueImportance}
-					{this.state.houseValueSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</li>
-					<li>You want the weather to be {weather}.
-					{this.state.weatherSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</li>
+					<li><span>Walkability is {this.props.currentAddress.walkScore}. Your importance was {this.props.user.walkabilityImportance}. Conclusion for you?
+					{this.state.walkSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+					<li><span>Median Age is {this.props.currentAddress.medianAge} compared to your desire for {this.props.user.medianDesiredAge}. Your importance was {this.props.user.medianAgeImportance}. Conclusion for you?
+					{this.state.ageSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+					<li><span>It has a diversity index of {(this.props.currentAddress.diversity * 100).toFixed(2)}% majority population. Your importance for diversity was {this.props.user.diversityImportance}. Conclusion for you?
+					{this.state.diversitySuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+					<li><span>Houses in the area are on average {this.props.currentAddress.houseValue} times the average income. Your importance was {this.props.user.houseValueImportance}. Conclusion for you?
+					{this.state.houseValueSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+					<li><span>You want the weather to be {weather}. Conclusion for you?
+					{this.state.weatherSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
 				</ul>
 			</div>
 		)
