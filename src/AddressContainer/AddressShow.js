@@ -7,11 +7,13 @@ class AddressShow extends Component {
 	constructor() {
 		super();
 		this.state = {
+			// This is a default video link to the 10 best things to see in america, just in case there is a youtube issue
 			youTubeURL: 'https://www.youtube.com/embed/98H5AN_vfOY',
 			wiki: {},
 			yelps: [],
 			currentNewWeather: 0,
 			currentOldWeather: 0,
+			// Calculates out to 5 or 3, depending on if logged in. Makes sure all information is received before displaying incomplete stats.
 			loading: 0
 		}
 	}
@@ -32,11 +34,11 @@ class AddressShow extends Component {
 				youTubeURL: `https://www.youtube.com/embed/${parsedYoutube.items[0].id.videoId}`,
 				loading: this.state.loading + 1
 			})
-			// }
 		} catch(err) {
 			console.log(err);
 		}
 	}
+	// Produces the summary from wikipedia for the address
 	getWiki = async () => {
 		try {
 			const wikiResponse = await fetch(`https://en.wikipedia.org/api/rest_v1/page/summary/${this.props.currentAddress.city}%2C_${this.props.currentAddress.state}?redirect=true`);
@@ -51,6 +53,7 @@ class AddressShow extends Component {
 			console.log(err);
 		}
 	}
+	// Weather for the users current zip. Only loads if logged in.
 	getOldWeather = async () => {
 		if(this.props.user.id){
 			try{
@@ -59,16 +62,17 @@ class AddressShow extends Component {
 				const parsedOldWeather = await oldWeatherResponse.json();
 
 				this.setState({
+					// Calculates kelvin into farenheit
 					currentOldWeather: Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32),
 					loading: this.state.loading + 1
 				})
 
-				// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
 			} catch(err) {
 				console.log(err);
 			}
 		}
 	}
+	// Weather for the showing address
 	getNewWeather = async () => {
 		try{
 			const newWeatherResponse = await fetch(`https://api.openweathermap.org/data/2.5/weather?zip=${this.props.currentAddress.zipCode},us&appid=${process.env.REACT_APP_OWMAPPID}`)
@@ -79,12 +83,11 @@ class AddressShow extends Component {
 				currentNewWeather: Math.round((parsedNewWeather.main.temp - 273.15) * 9 / 5 + 32),
 				loading: this.state.loading + 1
 			})
-
-			// const currentTemp = Math.round((parsedOldWeather.main.temp - 273.15) * 9 / 5 + 32);
 		} catch(err) {
 			console.log(err);
 		}
 	}
+	// Produces a yelp call for the term entered by the user when they registered.
 	getYelp = async () => {
 		if(this.props.user.nearbyAmenities){
 			try{
@@ -106,6 +109,7 @@ class AddressShow extends Component {
 		}
 	}
 	render() {
+		// This is done to make it so the website reads properly. Formating necessary.
 		const streetDeSpaced = this.props.currentAddress.streetName.replace(' ', '-');
 		const cityDeSpaced = this.props.currentAddress.city.replace(' ', '-');
 		const stateDeSpaced = this.props.currentAddress.state.replace(' ', '-');
@@ -124,6 +128,7 @@ class AddressShow extends Component {
 				return null
 			}
 		})
+		// If logged in it needs all 5 to load, if not logged in, it only loads youtube, wiki, and walk score
 		return (
 			<div className='Address-Show'>
 				{this.props.loggedIn ?

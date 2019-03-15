@@ -1,8 +1,9 @@
+// Comes from the usercontainer index.js
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const EditUser = (props) => {
-
+// Same input pattern as registration.
 	return (
 		<div>
 			<form onSubmit={props.handleSubmit} className='registration-form'>

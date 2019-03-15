@@ -1,8 +1,9 @@
+// In the app.js
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 
-
+// No state, but this has a lot of redirect functions for navigating from every page
 
 class Header extends Component {
 	constructor(){

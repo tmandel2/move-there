@@ -1,3 +1,4 @@
+// Comes from the index.js in authcontainer
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -40,13 +41,14 @@ class Login extends Component {
 					message: ''
 				})
 			}
+			// This redirects at the end to the user profile page
 			this.props.logIn(parsed);
-			// this.props.history.push('/users');
 		}catch(err){
 			console.log(err);
 			return(err);
 		}
 	}
+	// Message will only get shown if there is an error, because that is the only time there is a message to show.
 	render() {
 		return (
 			<div className='login'>

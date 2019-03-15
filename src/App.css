@@ -1,7 +1,6 @@
 html {
     background: url('./images/bricktown.jpg') no-repeat center center fixed;
     background-size: cover;
-    /*font-family: 'Proza Libre', sans-serif;*/
     font-family: 'Sansita', sans-serif;
     overflow: scroll;
 }

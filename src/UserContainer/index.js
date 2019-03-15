@@ -19,6 +19,7 @@ class UserContainer extends Component {
 			
 		}
 	}
+	// The ternary was necessary for making sure the user was logged in, and that information was gotten before loading everything.
 	componentDidMount() {
 		this.props.loggedIn ?
 			this.getUser()
@@ -34,6 +35,7 @@ class UserContainer extends Component {
 				throw Error(response.statusText);
 			}
 			const userParsed = await response.json();
+			// Sorts the addresses by when they were entered into the database.
 			this.setState({
 				user: {
 					user: userParsed.user,
@@ -67,6 +69,7 @@ class UserContainer extends Component {
 			console.log(err);
 		}
 	}
+	// This is for the editing of users
 	handleChange = (e) => {
 		this.setState({
 			userToEdit: {
@@ -77,6 +80,7 @@ class UserContainer extends Component {
 			}
 		})
 	}
+	// This is for the editing of users
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -103,11 +107,13 @@ class UserContainer extends Component {
 			console.log(err);
 		}
 	}
+	// Modal
 	showEdit = () => {
 		this.setState({
 			showEdit: true
 		})
 	}
+	// Modal back if they decide they don't actually want to edit
 	undoEdit = () => {
 		this.setState({
 			showEdit: false

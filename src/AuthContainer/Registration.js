@@ -1,3 +1,4 @@
+// In the authcontainer and connects to the index.js
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
@@ -57,7 +58,7 @@ class Registration extends Component {
 		}
 	}
 
-
+	// Message will only be produced if there is an issue with the username/email attempt
 	render() {
 		return (
 			<div>

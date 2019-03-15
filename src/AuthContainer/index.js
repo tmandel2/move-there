@@ -1,3 +1,4 @@
+// Comes from the main app.js
 import React, { Component } from 'react';
 import Login from './Login.js';
 import Registration from './Registration.js';

@@ -31,6 +31,7 @@ class NewAddress extends Component {
 	handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
+			// Call google geocode for lat and lon because some other apis need that information.
 			const latLongResponse = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${this.state.streetNumber}+${this.state.streetName.replace(/ /gi, '+')},+${this.state.city.replace(/ /gi, '+')},+${this.state.state}&key=${process.env.REACT_APP_GOOGLEKEY}`)
 
 			const parsedLatLong = await latLongResponse.json();
@@ -38,7 +39,7 @@ class NewAddress extends Component {
 			if(!latLongResponse.ok) {
 				throw Error(latLongResponse.statusText);
 			}
-
+			// Get information regarding demographics at the zip code
 			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODEMYKEY}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
@@ -46,7 +47,7 @@ class NewAddress extends Component {
 			if(!zipInfoResponse.ok) {
 				throw Error(zipInfoResponse.statusText);
 			}
-
+			// Build the api call for walk score. Needs to happen from server side due to walk score restrictions.
 			const walkScoreResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/walkscore`, {
 				credentials: 'include',
 				headers: {
@@ -74,7 +75,7 @@ class NewAddress extends Component {
 				medianAge: parsedZipInfo.item.MedianAge,
 				walkScore: parsedWalk.walkscore
 			});
-
+			// Finally post to the server to put in the database. All the info needs to be returned before this happens
 			const registerResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses`, {
 				method: 'POST',
 				credentials: 'include',
@@ -89,13 +90,14 @@ class NewAddress extends Component {
 			}
 
 			await registerResponse.json();
-
+			// Take you to your user page
 			this.props.history.push('/users');
 
 		} catch(err) {
 			console.log(err);
 		}
 	}
+// Only thing a user needs to enter is the address. The rest is handled by the system.
 	render() {
 		return (
 			<div>

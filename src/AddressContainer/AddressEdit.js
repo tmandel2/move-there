@@ -1,3 +1,4 @@
+// Comes from index.js in the AddressContainer. The edits are handled there.
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 

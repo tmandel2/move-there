@@ -1,9 +1,10 @@
+// Comes from index.js in address container
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
 
 
 
-
+// This page shows all addresses entered by all users
 class AddressIndex extends Component {
 	constructor(){
 		super();

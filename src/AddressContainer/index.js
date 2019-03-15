@@ -29,6 +29,7 @@ class AddressContainer extends Component {
 			}
 		})
 	}
+	// Runs the same checks that happen when a new address is made. This and New Address are the only times these APIs need to be called to load the database. Reduces stress on API keys.
 	handleEditSubmit = async (e) => {
 		e.preventDefault();
 		try {
@@ -77,7 +78,7 @@ class AddressContainer extends Component {
 					walkScore: parsedWalk.walkscore
 				}
 			});
-
+			// Make the call to the database once all the api calls have returned.
 			const editResponse = await fetch(`${process.env.REACT_APP_ROUTE}addresses/${this.state.addressToEdit.id}`, {
 				method: 'PUT',
 				credentials: 'include',

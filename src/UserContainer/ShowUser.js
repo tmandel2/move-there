@@ -1,7 +1,9 @@
+// From index.js in usercontainer
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 
 const ShowUser = (props) => {
+	// Gathers all of a users address, but also prevents an error from appearing if they don't have an address yet.
 	const addressesList = props.user.addresses.map((address, i) => {
 		if(address) {
 			return <li key={i}>

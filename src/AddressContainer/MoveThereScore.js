@@ -20,6 +20,7 @@ class MoveThereScore extends Component {
 		this.calculateDiversity();
 		this.calculateWeather();
 	}
+	// Have to do walk, because even though transit shows, it doesn't not come back with the API
 	calculateWalk = () => {
 		if(
 			(this.props.currentAddress.walkScore > 90 && this.props.user.walkabilityImportance <= 5)
@@ -33,6 +34,7 @@ class MoveThereScore extends Component {
 			})
 		}
 	}
+	// Lower importance means more leeway in the age allowed
 	calculateAge = () => {
 		if((Math.abs(this.props.currentAddress.medianAge - this.props.user.medianDesiredAge) <= 5 && this.props.user.medianAgeImportance <= 5)
 			|| (Math.abs(this.props.currentAddress.medianAge - this.props.user.medianDesiredAge) <= 8 && this.props.user.medianAgeImportance <= 4)
@@ -45,6 +47,7 @@ class MoveThereScore extends Component {
 				})
 			}
 	}
+	// House value is the average value of a house v. the average income in the area
 	calculateHouseValue = () => {
 		if((this.props.currentAddress.houseValue <= 2 && this.props.user.houseValueImportance <= 5)
 			|| (this.props.currentAddress.houseValue <= 4 && this.props.user.houseValueImportance <= 4)
@@ -57,6 +60,7 @@ class MoveThereScore extends Component {
 			})
 		}
 	}
+	// The more important diversity is to the user, the lower the diversity ratio needs to be
 	calculateDiversity = () => {
 		if((this.props.currentAddress.diversity < .6 && this.props.user.diversityImportance <= 5)
 			|| (this.props.currentAddress.diversity < .75 && this.props.user.diversityImportance <= 4)
@@ -69,6 +73,7 @@ class MoveThereScore extends Component {
 				})
 		}
 	}
+	// Checks the users preferred weather against the current temperature difference
 	calculateWeather = () => {
 		if((this.props.user.desiredWeather === 3 && (this.props.currentNewWeather - this.props.currentOldWeather) > 5)
 			|| (this.props.user.desiredWeather === 2 && (Math.abs(this.props.currentNewWeather - this.props.currentOldWeather) <= 5))
@@ -80,7 +85,6 @@ class MoveThereScore extends Component {
 		}
 	}
 	render() {
-		console.log(this.props.currentAddress);
 		let weather = '';
 		if(this.props.user.desiredWeather === 3){
 			weather = 'warmer'
