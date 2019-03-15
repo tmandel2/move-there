@@ -40,7 +40,7 @@ class AddressContainer extends Component {
 				throw Error(latLongResponse.statusText);
 			}
 
-			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.addressToEdit.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
+			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.addressToEdit.zipCode}?key=${process.env.REACT_APP_ZIPCODEMYKEY}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
 
@@ -92,12 +92,10 @@ class AddressContainer extends Component {
 			}
 
 			const parsedResponse = await editResponse.json();
-
+			console.log(parsedResponse);
 			this.props.updateAddress(parsedResponse);
 			this.props.showAddress(parsedResponse.id);
-			// this.setState({
-			// 	showEdit: false
-			// })
+
 		} catch(err) {
 			console.log(err);
 		}

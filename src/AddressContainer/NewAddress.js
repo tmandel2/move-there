@@ -39,7 +39,7 @@ class NewAddress extends Component {
 				throw Error(latLongResponse.statusText);
 			}
 
-			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODETRIAL}`)
+			const zipInfoResponse = await fetch(`https://api.zip-codes.com/ZipCodesAPI.svc/1.0/GetZipCodeDetails/${this.state.zipCode}?key=${process.env.REACT_APP_ZIPCODEMYKEY}`)
 
 			const parsedZipInfo = await zipInfoResponse.json();
 

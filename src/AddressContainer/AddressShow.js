@@ -126,40 +126,78 @@ class AddressShow extends Component {
 		})
 		return (
 			<div className='Address-Show'>
-				{this.state.loading < 5 ? 
-					<h1>LOADING</h1>
-					: 
-					<div className='Address-Info'>
+				{this.props.loggedIn ?
+					<div>
+					{this.state.loading < 5 ? 
+						<h1>LOADING</h1>
+						: 
+						<div className='Address-Info'>
 
-						<h2>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}</h2>
-						{this.props.currentAddress.user.id === this.props.user.id ?
-							<button onClick={this.props.showEdit}>Edit This Address</button>
+							<h2>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}</h2>
+							{this.props.currentAddress.user.id === this.props.user.id ?
+								<button onClick={this.props.showEdit}>Edit This Address</button>
+								: null}
+							{this.props.loggedIn ? 
+							<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress} currentNewWeather= {this.state.currentNewWeather} currentOldWeather = {this.state.currentOldWeather} />
 							: null}
-						{this.props.loggedIn ? 
-						<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress} currentNewWeather= {this.state.currentNewWeather} currentOldWeather = {this.state.currentOldWeather} />
-						: null}
-						<div className='weathers'>
-							{this.props.loggedIn ? <h2>It is {this.state.currentOldWeather}&deg; F where you are.</h2> : null}
-							<h2>It is {this.state.currentNewWeather}&deg; F here.</h2>
+							<div className='weathers'>
+								{this.props.loggedIn ? <h2>It is {this.state.currentOldWeather}&deg; F where you are.</h2> : null}
+								<h2>It is {this.state.currentNewWeather}&deg; F here.</h2>
+							</div>
+							<div>
+								<a href={WalkScoreLink} target='_blank' rel='noopener noreferrer nofollow'>
+									<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
+									<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
+									<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>
+								</a>
+							</div>
+							<p>{this.state.wiki.extract}</p>
+							<h4>Courtesy WikiMedia</h4>
+							<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
+							{this.props.user.nearbyAmenities ?
+								<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
+								: null
+							}
+							<ul className='yelp-list'>
+								{yelpDistanceList}
+							</ul>
 						</div>
-						<div>
-							<a href={WalkScoreLink} target='_blank' rel='noopener noreferrer nofollow'>
-								<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
-								<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
-								<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>
-							</a>
+					} </div>
+					: <div>{this.state.loading < 3 ?
+						<h1>LOADING</h1>
+						: 
+						<div className='Address-Info'>
+
+							<h2>{this.props.currentAddress.streetNumber} {this.props.currentAddress.streetName}, {this.props.currentAddress.city}, {this.props.currentAddress.state} {this.props.currentAddress.zipCode}</h2>
+							{this.props.currentAddress.user.id === this.props.user.id ?
+								<button onClick={this.props.showEdit}>Edit This Address</button>
+								: null}
+							{this.props.loggedIn ? 
+							<MoveThereScore user={this.props.user} currentAddress={this.props.currentAddress} currentNewWeather= {this.state.currentNewWeather} currentOldWeather = {this.state.currentOldWeather} />
+							: null}
+							<div className='weathers'>
+								{this.props.loggedIn ? <h2>It is {this.state.currentOldWeather}&deg; F where you are.</h2> : null}
+								<h2>It is {this.state.currentNewWeather}&deg; F here.</h2>
+							</div>
+							<div>
+								<a href={WalkScoreLink} target='_blank' rel='noopener noreferrer nofollow'>
+									<img src={walkScoreSrcWalk} alt="Walk Score of Current Address"/>
+									<img src={walkScoreSrcTrans} alt="Transit Score of Current Address"/>
+									<img src={walkScoreSrcBike} alt="Bike Score of Current Address"/>
+								</a>
+							</div>
+							<p>{this.state.wiki.extract}</p>
+							<h4>Courtesy WikiMedia</h4>
+							<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
+							{this.props.user.nearbyAmenities ?
+								<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
+								: null
+							}
+							<ul className='yelp-list'>
+								{yelpDistanceList}
+							</ul>
 						</div>
-						<p>{this.state.wiki.extract}</p>
-						<h4>Courtesy WikiMedia</h4>
-						<iframe title='tour video' src={this.state.youTubeURL} className='iframe'></iframe>
-						{this.props.user.nearbyAmenities ?
-							<h2>These Places Are Related To Your Desire For {this.props.user.nearbyAmenities}</h2>
-							: null
-						}
-						<ul className='yelp-list'>
-							{yelpDistanceList}
-						</ul>
-					</div>
+					}</div>
 				}
 			</div>
 		)

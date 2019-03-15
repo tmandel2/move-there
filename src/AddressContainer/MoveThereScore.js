@@ -80,6 +80,7 @@ class MoveThereScore extends Component {
 		}
 	}
 	render() {
+		console.log(this.props.currentAddress);
 		let weather = '';
 		if(this.props.user.desiredWeather === 3){
 			weather = 'warmer'
@@ -88,17 +89,22 @@ class MoveThereScore extends Component {
 		} else if(this.props.user.desiredWeather === 1){
 			weather = 'colder'
 		}
+		// This shows the scores. Certain addresses return null from zipcode API, so there is a ternary check in here to make sure that these nulls don't break the display.
 		return (
 			<div>
 				<ul>
 					<li><span>Walkability is {this.props.currentAddress.walkScore}. Your importance was {this.props.user.walkabilityImportance}. Conclusion for you?
 					{this.state.walkSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
-					<li><span>Median Age is {this.props.currentAddress.medianAge} compared to your desire for {this.props.user.medianDesiredAge}. Your importance was {this.props.user.medianAgeImportance}. Conclusion for you?
-					{this.state.ageSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
-					<li><span>It has a diversity index of {(this.props.currentAddress.diversity * 100).toFixed(2)}% majority population. Your importance for diversity was {this.props.user.diversityImportance}. Conclusion for you?
-					{this.state.diversitySuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
-					<li><span>Houses in the area are on average {(this.props.currentAddress.houseValue).toFixed(2)} times the average income. Your importance was {this.props.user.houseValueImportance}. Conclusion for you?
-					{this.state.houseValueSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+					{this.props.currentAddress.houseValue ?
+						<div>
+							<li><span>Median Age is {this.props.currentAddress.medianAge} compared to your desire for {this.props.user.medianDesiredAge}. Your importance was {this.props.user.medianAgeImportance}. Conclusion for you?
+							{this.state.ageSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+							<li><span>It has a diversity index of {(this.props.currentAddress.diversity * 100).toFixed(2)}% majority population. Your importance for diversity was {this.props.user.diversityImportance}. Conclusion for you?
+							{this.state.diversitySuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+							<li><span>Houses in the area are on average {(this.props.currentAddress.houseValue).toFixed(2)} times the average income. Your importance was {this.props.user.houseValueImportance}. Conclusion for you?
+							{this.state.houseValueSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
+						</div>
+						: null}
 					<li><span>You want the weather to be {weather}. Conclusion for you?
 					{this.state.weatherSuccess ? <img className='rating-hand' src='../thumbsup.png' alt='thumbs up'/> : <img className='rating-hand' src='../thumbsdown.png' alt='thumbs down'/>}</span></li>
 				</ul>
