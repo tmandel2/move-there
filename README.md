@@ -1,68 +1,24 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Move There
+https://move-there-app.herokuapp.com
+### An app to help you make a big life decision
 
-## Available Scripts
+-------------------------------------
 
-In the project directory, you can run:
+## How it works
+Register with your username, password and email. Answer a few simple questions of what you are looking for in a place to live. Then you can start entering in the address of houses you are looking at on the market. From there, the program does the rest. With your preferences and prospective properties, Move There will tell you what there is to like, and not like, about the new neighborhood.
 
-### `npm start`
+Utilizing weather date from Open Weather Map, walk scores from WalkScore, demographic information from the government, Yelp information, and YouTube, Move There provides everything you need!
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Address isn't what you thought it was? Edit any address you've entered.
+No longer want to look at the location? Delete the address.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Interested in properties other users are looking at? Feel Free!
 
-### `npm test`
+---------------------------------------
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Technologies
+React client-side, with a Maven/SpringBoot Java server. Database is PostgreSQL. Hosted on Heroku.
 
-### `npm run build`
+Special thanks to WikiMedia, YouTube, OpenWeatherMap, WalkScore, Yelp, ZipCode, and Google Geocoding.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Pictures are open source found through the google search engine.
