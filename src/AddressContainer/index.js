@@ -93,7 +93,7 @@ class AddressContainer extends Component {
 			}
 
 			const parsedResponse = await editResponse.json();
-			console.log(parsedResponse);
+
 			this.props.updateAddress(parsedResponse);
 			this.props.showAddress(parsedResponse.id);
 
