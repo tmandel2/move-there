@@ -219,3 +219,26 @@ h2 {
 .rating-hand {
 	height: 30px;
 }
+
+.social-media {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 0;
+}
+
+.fa {
+  padding: 5px;
+  font-size: 32px;
+  text-align: right;
+  text-decoration: none;
+  color: white;
+  text-shadow: 1px 1px 2px black;
+  padding-top: 0;
+}
+
+#linkedin:hover, #github:hover {
+  color: darkblue;
+  text-decoration: none;
+  text-shadow: 2px 2px 4px white;
+}

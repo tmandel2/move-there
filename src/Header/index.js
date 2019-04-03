@@ -29,6 +29,10 @@ class Header extends Component {
 	render() {
 		return(
 			<header>
+				<div className="social-media">
+					<a href="https://www.linkedin.com/in/timothy-mandel" className="fa fa-linkedin icon" id="linkedin" target='_blank' rel='noopener noreferrer'> </a>
+					<a href="https://www.github.com/tmandel2" className="fa fa-github icon" id="github" target='_blank' rel='noopener noreferrer'> </a>
+				</div>
 				<h1 id='move-there-header'>Move There?</h1>
 				<nav>
 					<button onClick={this.goToAddresses}>See All Addresses</button>
